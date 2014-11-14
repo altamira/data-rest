@@ -16,12 +16,12 @@
     limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.altamira</groupId>
     <artifactId>data-rest</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.5.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Data RESTful Services</name>
 
@@ -36,16 +36,16 @@
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
-            message: -->
+        message: -->
         <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-            resources, i.e. build is platform dependent! -->
+        resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- JBoss dependency versions -->
         <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
 
         <!-- Define the version of the JBoss BOMs we want to import to specify 
-            tested stacks. -->
+        tested stacks. -->
         <version.jboss.bom>8.0.0.Final</version.jboss.bom>
         <version.arquillian.container>8.0.0.Final</version.arquillian.container>
 
@@ -57,19 +57,23 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.7</maven.compiler.target>
         <maven.compiler.source>1.7</maven.compiler.source>
+        
+        <!-- Altamira Data -->
+        <version.data>0.5.0-SNAPSHOT</version.data>
+        
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
             <!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill
-                of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
-                of artifacts. We use this here so that we always get the correct versions 
-                of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can
-                read this as the JBoss stack of the Java EE 7 APIs, with some extras tools
-                for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
-                stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
-                from the Hibernate family of projects) -->
+            of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
+            of artifacts. We use this here so that we always get the correct versions 
+            of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can
+            read this as the JBoss stack of the Java EE 7 APIs, with some extras tools
+            for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
+            stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
+            from the Hibernate family of projects) -->
             <dependency>
                 <groupId>org.wildfly.bom</groupId>
                 <artifactId>jboss-javaee-7.0-with-tools</artifactId>
@@ -90,10 +94,10 @@
     <dependencies>
 
         <!-- First declare the APIs we depend on and need for compilation. All 
-            of them are provided by JBoss WildFly -->
+        of them are provided by JBoss WildFly -->
 
         <!-- Import the CDI API, we use provided scope as the API is included in 
-            JBoss WildFly -->
+        JBoss WildFly -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
@@ -101,7 +105,7 @@
         </dependency>
 
         <!-- Import the Common Annotations API (JSR-250), we use provided scope 
-            as the API is included in JBoss WildFly -->
+        as the API is included in JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
             <artifactId>jboss-annotations-api_1.2_spec</artifactId>
@@ -109,7 +113,7 @@
         </dependency>
 
         <!-- Import the JAX-RS API, we use provided scope as the API is included 
-            in JBoss WildFly -->
+        in JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
@@ -117,7 +121,7 @@
         </dependency>
 
         <!-- Import the JPA API, we use provided scope as the API is included in 
-            JBoss WildFly -->
+        JBoss WildFly -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
@@ -125,7 +129,7 @@
         </dependency>
 
         <!-- Import the EJB API, we use provided scope as the API is included in 
-            JBoss WildFly -->
+        JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
@@ -148,7 +152,7 @@
         </dependency>
 
         <!-- Import the JSF API, we use provided scope as the API is included in 
-            JBoss WildFly -->
+        JBoss WildFly -->
         <dependency>
             <groupId>org.jboss.spec.javax.faces</groupId>
             <artifactId>jboss-jsf-api_2.2_spec</artifactId>
@@ -158,7 +162,7 @@
         <!-- Now we declare any tools needed -->
 
         <!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
-            typesafe criteria queries -->
+        typesafe criteria queries -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
@@ -166,7 +170,7 @@
         </dependency>
 
         <!-- Annotation processor that raising compilation errors whenever constraint 
-            annotations are incorrectly used. -->
+        annotations are incorrectly used. -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
@@ -182,7 +186,7 @@
 
         <!-- Optional, but highly recommended -->
         <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) 
-            JPA from JUnit/TestNG -->
+        JPA from JUnit/TestNG -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
@@ -195,15 +199,22 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>br.com.altamira</groupId>
+            <artifactId>data-dao</artifactId>
+            <version>${version.data}</version>
+            <type>war</type>
+        </dependency>
+        
     </dependencies>
 
     <build>
         <!-- Maven will append the version to the finalName (which is the name 
-            given to the generated war, and hence the context root) -->
+        given to the generated war, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
-                processors -->
+            processors -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${version.compiler.plugin}</version>
@@ -233,9 +244,9 @@
     <profiles>
         <profile>
             <!-- The default profile skips all tests, though you can tune it to run 
-                just unit tests based on a custom pattern -->
+            just unit tests based on a custom pattern -->
             <!-- Seperate profiles are provided for running all tests, including Arquillian 
-                tests that execute in the specified container -->
+            tests that execute in the specified container -->
             <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -256,9 +267,9 @@
         <profile>
 
             <!-- An optional Arquillian testing profile that executes tests
-                in your WildFly instance -->
+            in your WildFly instance -->
             <!-- This profile will start a new WildFly instance, and execute the
-                test, shutting it down when done -->
+            test, shutting it down when done -->
             <!-- Run with: mvn clean test -Parq-wildfly-managed -->
             <id>arq-wildfly-managed</id>
             <dependencies>
@@ -273,7 +284,7 @@
 
         <profile>
             <!-- An optional Arquillian testing profile that executes tests
-                in a remote WildFly instance -->
+            in a remote WildFly instance -->
             <!-- Run with: mvn clean test -Parq-wildfly-remote -->
             <id>arq-wildfly-remote</id>
             <dependencies>
@@ -288,11 +299,11 @@
 
         <profile>
             <!-- When built in OpenShift the 'openshift' profile will be used when 
-                invoking mvn. -->
+            invoking mvn. -->
             <!-- Use this profile for any OpenShift specific customization your app 
-                will need. -->
+            will need. -->
             <!-- By default that is to put the resulting archive into the 'deployments' 
-                folder. -->
+            folder. -->
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <build>
@@ -312,7 +323,7 @@
     </profiles>
     <description>Data RESTful Services</description>
     <organization>
-    	<name>Altamira Industria Metalurgica Ltda</name>
-    	<url>http://www.altamira.com.br</url>
+        <name>Altamira Industria Metalurgica Ltda</name>
+        <url>http://www.altamira.com.br</url>
     </organization>
 </project>
