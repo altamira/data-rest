@@ -26,6 +26,12 @@
     <name>Data RESTful Services</name>
 
     <url>http://data.altamira.com.br</url>
+    <description>Data RESTful Services</description>
+    <organization>
+        <name>Altamira Industria Metalurgica Ltda</name>
+        <url>http://www.altamira.com.br</url>
+    </organization>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -33,6 +39,20 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/altamira/altamira-data/issues</url>
+    </issueManagement>
+    <scm>
+        <connection>scm:git:git://github.com/altamira/altamira-data.git</connection>
+        <developerConnection>scm:git:git@github.com:altamira/altamira-data.git</developerConnection>
+        <url>https://github.com/altamira/altamira-data</url>
+    </scm>
+
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -46,8 +66,10 @@
 
         <!-- Define the version of the JBoss BOMs we want to import to specify 
         tested stacks. -->
-        <version.jboss.bom>8.0.0.Final</version.jboss.bom>
-        <version.arquillian.container>8.0.0.Final</version.arquillian.container>
+        <version.jboss.bom>8.1.0.Final</version.jboss.bom>
+        <version.wildfly>8.1.0.Final</version.wildfly>
+        <version.arquillian.container>8.1.0.Final</version.arquillian.container>
+        <version.org.jboss.arquillian>1.1.5.Final</version.org.jboss.arquillian>
 
         <!-- other plugin versions -->
         <version.compiler.plugin>3.1</version.compiler.plugin>
@@ -55,12 +77,18 @@
         <version.war.plugin>2.1.1</version.war.plugin>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         
+        <version.shrinkwrap.resolvers>2.1.1</version.shrinkwrap.resolvers>
+        
+        <jackson.version>2.3.2</jackson.version>
+
+        <version.jta>1.1</version.jta>
+
         <!-- Altamira Data -->
         <version.data>0.5.0-SNAPSHOT</version.data>
-        
+
     </properties>
 
 
@@ -75,6 +103,21 @@
             stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
             from the Hibernate family of projects) -->
             <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.shrinkwrap.resolvers}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- Arquillian BOM (Bill Of Materials). -->
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${version.org.jboss.arquillian}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.wildfly.bom</groupId>
                 <artifactId>jboss-javaee-7.0-with-tools</artifactId>
                 <version>${version.jboss.bom}</version>
@@ -87,6 +130,13 @@
                 <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-bom</artifactId>
+                <version>3.0.9.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -117,6 +167,11 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-validator-provider-11</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -151,14 +206,6 @@
             </exclusions>
         </dependency>
 
-        <!-- Import the JSF API, we use provided scope as the API is included in 
-        JBoss WildFly -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.faces</groupId>
-            <artifactId>jboss-jsf-api_2.2_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Now we declare any tools needed -->
 
         <!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
@@ -175,6 +222,14 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Json Jackson dependencies -->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate4</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!-- Needed for running tests (you may also use TestNG) -->
@@ -199,11 +254,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Shrinkwrap resolver dependencies -->
+        
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <!-- <version>${version.shrinkwrap.resolvers}</version> -->
+            <scope>test</scope>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
             <groupId>br.com.altamira</groupId>
             <artifactId>data-dao</artifactId>
             <version>${version.data}</version>
-            <type>war</type>
+            <type>jar</type>
         </dependency>
         
     </dependencies>
@@ -211,7 +276,7 @@
     <build>
         <!-- Maven will append the version to the finalName (which is the name 
         given to the generated war, and hence the context root) -->
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <!-- Compiler plugin enforces Java 1.6 compatibility and activates annotation 
             processors -->
@@ -229,6 +294,7 @@
                 <configuration>
                     <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <attachClasses>true</attachClasses>
                 </configuration>
             </plugin>
             <!-- The WildFly plugin deploys your war to a local WildFly container -->
@@ -237,6 +303,24 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>${version.wildfly.maven.plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <!-- <execution>
+                            <id>enforce</id>
+                            <configuration>
+                                    <rules>
+                                            <DependencyConvergence />
+                                    </rules>
+                            </configuration>
+                            <goals>
+                                    <goal>enforce</goal>
+                            </goals>
+                    </execution> -->
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -294,6 +378,22 @@
                     <version>${version.arquillian.container}</version>
                     <scope>test</scope>
                 </dependency>
+
+                <dependency>
+                    <groupId>org.jboss.resteasy</groupId>
+                    <artifactId>resteasy-client</artifactId>
+                    <version>3.0.6.Final</version>
+                    <scope>test</scope>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>commons-io</groupId>
+                            <artifactId>commons-io</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+
+
+
             </dependencies>
         </profile>
 
@@ -321,9 +421,4 @@
         </profile>
 
     </profiles>
-    <description>Data RESTful Services</description>
-    <organization>
-        <name>Altamira Industria Metalurgica Ltda</name>
-        <url>http://www.altamira.com.br</url>
-    </organization>
 </project>
