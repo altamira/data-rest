@@ -21,7 +21,7 @@ public class UnitEndpoint extends BaseEndpoint<Unit> {
     /**
      *
      */
-    public UnitEndpoint() {
-        this.type = UnitEndpoint.class;
-    }
+//    public UnitEndpoint() {
+//        this.type = UnitEndpoint.class;
+//    }
 }

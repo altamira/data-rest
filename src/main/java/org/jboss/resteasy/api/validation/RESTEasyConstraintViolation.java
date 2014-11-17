@@ -14,6 +14,11 @@ import java.io.Serializable;
  */
 public class RESTEasyConstraintViolation implements Serializable
 {
+   /**
+	 * 
+	 */
+   private static final long serialVersionUID = 9003143722759505458L;
+	
    private String message;
    private String path;
    private String value;

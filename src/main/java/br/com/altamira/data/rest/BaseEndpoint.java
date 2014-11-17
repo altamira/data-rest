@@ -7,17 +7,18 @@ package br.com.altamira.data.rest;
 
 import br.com.altamira.data.dao.BaseDao;
 import br.com.altamira.data.serialize.JSonViews;
-import br.com.altamira.data.serialize.NullValueSerializer;
+import br.com.altamira.data.rest.serialize.NullValueSerializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
-import java.io.IOException;
 
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.logging.Logger;
+
 import javax.inject.Inject;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -36,6 +37,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.UriBuilder;
@@ -100,7 +102,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     /**
      *
      */
-    protected Class<? extends BaseEndpoint<T>> type;
+    //protected Class<? extends BaseEndpoint<T>> type;
 
     @Inject
     protected BaseDao<T> dao;
@@ -122,15 +124,12 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             @DefaultValue("10") @QueryParam("max") Integer maxResult)
             throws IOException {
 
-        if (info.getPathParameters().get("id").isEmpty()) {
-            return createListResponse(
-                    dao.list(startPosition, maxResult)).build();
-        } else {
-            return createListResponse(
-                    dao.list(
-                            Long.parseLong(info.getPathParameters().get("id").get(info.getPathParameters().get("id").size() - 1)),
-                            startPosition, maxResult)).build();
-        }
+        MultivaluedMap<String, String> map = info.getPathParameters();
+        
+        map.putAll(info.getQueryParameters());
+        
+        return createListResponse(
+                dao.list(map, startPosition, maxResult)).build();
     }
 
     /**
@@ -154,21 +153,21 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
      *
      * @param startPosition
      * @param maxResult
-     * @param searchCriteria
-     * @param headers
      * @return
      * @throws IOException
      */
-    // @GET
-    // @Path("search")
-    // @Produces(MediaType.APPLICATION_JSON)
-    // public Response search(
-    // @DefaultValue("0") @QueryParam("start") Integer startPosition,
-    // @DefaultValue("10") @QueryParam("max") Integer maxResult,
-    // @Size(min = 2) @QueryParam("search") String searchCriteria)
-    // throws IOException {
-    // throw new UnsupportedOperationException("Not supported yet.");
-    // }
+    /*@GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response search(
+            @DefaultValue("0") @QueryParam("start") Integer startPosition,
+            @DefaultValue("10") @QueryParam("max") Integer maxResult)
+            throws IOException {
+
+        return createListResponse(
+                dao.list(info.getQueryParameters(), startPosition, maxResult)).build();
+    }*/
+    
     /**
      *
      * @param entity
@@ -185,7 +184,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             throws IllegalArgumentException, UriBuilderException,
             JsonProcessingException {
 
-        return createCreatedResponse(dao.create(entity)).build();
+        return createCreatedResponse(dao.create(entity, info.getPathParameters())).build();
     }
 
     /**
@@ -205,7 +204,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             throws JsonProcessingException {
 
         return createEntityResponse(
-                dao.update(entity)).build();
+                dao.update(entity, info.getPathParameters())).build();
     }
 
     /**
@@ -219,7 +218,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     public Response delete(
             @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id)
             throws JsonProcessingException {
-        
+
         dao.remove(id);
 
         return createNoContentResponse().build();
@@ -252,15 +251,15 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
     @OPTIONS
     @Path("/{id:[0-9]*}")
-    public Response corsPreflightForIdPath(@HeaderParam("Origin") String origin) {
+    public Response corsPreflightForIdPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
         return getCORSHeaders(origin);
     }
 
-    @OPTIONS
+    /*@OPTIONS
     @Path("/search")
     public Response corsPreflightForSearchPath(@HeaderParam("Origin") String origin) {
         return getCORSHeaders(origin);
-    }
+    }*/
 
     /**
      *
@@ -269,7 +268,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
      */
     @OPTIONS
     @Path("{key:[a-zA-Z0-9]*}")
-    public Response corsPreflightPath(@HeaderParam("Origin") String origin) {
+    public Response corsPreflightPath(@HeaderParam("Origin") String origin, @PathParam("key") String key) {
         return getCORSHeaders(origin);
     }
 

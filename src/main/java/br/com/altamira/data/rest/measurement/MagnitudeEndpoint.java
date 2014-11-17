@@ -15,13 +15,13 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/measurement/magnitude")
+@Path("measurement/magnitude")
 public class MagnitudeEndpoint extends BaseEndpoint<Magnitude> {
 
     /**
      *
      */
-    public MagnitudeEndpoint() {
-        this.type = MagnitudeEndpoint.class;
-    }
+//    public MagnitudeEndpoint() {
+//        this.type = MagnitudeEndpoint.class;
+//    }
 }
