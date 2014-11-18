@@ -27,6 +27,7 @@
     <class>br.com.altamira.data.model.sales.OrderItemPart</class>
     <class>br.com.altamira.data.model.sales.Product</class>
     <class>br.com.altamira.data.dao.BaseDao</class>
+    <class>br.com.altamira.data.model.common.Color</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create"/>
