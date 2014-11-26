@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("common/material/{parentId:[9-0]*}/component")
+@Path("common/material/{parentId:[0-9]*}/component")
 public class ComponentEndpoint extends BaseEndpoint<br.com.altamira.data.model.common.Component> {
     
 }

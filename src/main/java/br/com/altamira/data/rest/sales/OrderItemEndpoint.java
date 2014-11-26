@@ -13,15 +13,4 @@ import javax.enterprise.context.RequestScoped;
 @Path("sales/orderitem/{number:[0-9]*}")
 public class OrderItemEndpoint extends BaseEndpoint<OrderItem> {
 
-
-//    @EJB
-//    private OrderItemDao orderItemDao;
-//    
-//        
-//    /**
-//     *
-//     */
-//    public OrderItemEndpoint() {
-//        this.type = OrderItemEndpoint.class;
-//    }
 }

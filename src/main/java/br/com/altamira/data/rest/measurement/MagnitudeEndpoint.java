@@ -18,10 +18,4 @@ import javax.ws.rs.Path;
 @Path("measurement/magnitude")
 public class MagnitudeEndpoint extends BaseEndpoint<Magnitude> {
 
-    /**
-     *
-     */
-//    public MagnitudeEndpoint() {
-//        this.type = MagnitudeEndpoint.class;
-//    }
 }

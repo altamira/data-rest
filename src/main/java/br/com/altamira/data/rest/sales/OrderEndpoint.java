@@ -14,13 +14,4 @@ import javax.enterprise.context.RequestScoped;
 @Path("/sales/order")
 public class OrderEndpoint extends BaseEndpoint<Order> {
 
-//    @EJB
-//    private OrderDao orderDao;
-//    
-//    /**
-//     *
-//     */
-//    public OrderEndpoint() {
-//        this.type = OrderEndpoint.class;
-//    }
 }

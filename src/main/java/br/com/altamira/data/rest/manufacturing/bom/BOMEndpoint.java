@@ -35,102 +35,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
 
     /**
      *
-     */
-    /*public BOMEndpoint() {
-     this.type = BOMEndpoint.class;
-     }*/
-    /**
-     *
-     * @param startPosition
-     * @param maxResult
-     * @return
-     * @throws IOException
-     */
-    /*@GET
-     @Produces(MediaType.APPLICATION_JSON)
-     public Response list(
-     @DefaultValue("0") @QueryParam("start") Integer startPosition,
-     @DefaultValue("10") @QueryParam("max") Integer maxResult)
-     throws IOException {
-
-     return createListResponse(
-     bomDao.listUnchecked(startPosition, maxResult)).build();
-     }*/
-    /**
-     *
-     * @param startPosition
-     * @param maxResult
-     * @param search
-     * @return
-     * @throws IOException
-     */
-    /*@GET
-     @Path("/search")
-     @Produces(MediaType.APPLICATION_JSON)
-     public Response search(
-     @Size(min = 2) @QueryParam("search") String search,
-     @DefaultValue("0") @QueryParam("start") Integer startPosition,
-     @DefaultValue("10") @QueryParam("max") Integer maxResult)
-     throws IOException {
-
-     return createListResponse(
-     bomDao.search(search, startPosition, maxResult)).build();
-     }*/
-    /**
-     *
-     * @param id
-     * @return
-     * @throws JsonProcessingException
-     */
-    /*@GET
-     @Path("/{id:[0-9]*}")
-     @Produces(MediaType.APPLICATION_JSON)
-     public Response find(
-     @Min(1) @PathParam("id") long id)
-     throws JsonProcessingException {
-
-     return createEntityResponse(bomDao.find(id)).build();
-     }*/
-    /**
-     *
-     * @param entity
-     * @return
-     * @throws IllegalArgumentException
-     * @throws UriBuilderException
-     * @throws JsonProcessingException
-     */
-    /*@POST
-     @Consumes(MediaType.APPLICATION_JSON)
-     @Produces(MediaType.APPLICATION_JSON)
-     @Override
-     public Response create(
-     @NotNull(message = ENTITY_VALIDATION) BOM entity)
-     throws IllegalArgumentException, UriBuilderException, JsonProcessingException {
-
-     return createCreatedResponse(bomDao.create(entity)).build();
-     }*/
-    /**
-     *
-     * @param id
-     * @param entity
-     * @return
-     * @throws JsonProcessingException
-     */
-    /*@PUT
-     @Path("/{id:[0-9]*}")
-     @Consumes(value = MediaType.APPLICATION_JSON)
-     @Produces(value = MediaType.APPLICATION_JSON)
-     @Override
-     public Response update(
-     @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id,
-     @NotNull(message = ENTITY_VALIDATION) BOM entity)
-     throws JsonProcessingException {
-
-     return createEntityResponse(
-     bomDao.update(entity)).build();
-     }*/
-    /**
-     *
      * @param id
      * @return
      * @throws JsonProcessingException
@@ -166,23 +70,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
 
     }
     
-    /**
-     *
-     * @param origin
-     * @param id
-     * @return
-     */
-    /*@DELETE
-     @Path("/{id:[0-9]*}")
-     @Override
-     public Response delete(
-     @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id)
-     throws JsonProcessingException {
-
-     bomDao.remove(id);
-
-     return createNoContentResponse().build();
-     }*/
     @OPTIONS
     @Path("/{id:[0-9]*}/checked")
     public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {

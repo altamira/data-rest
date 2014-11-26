@@ -18,10 +18,4 @@ import javax.ws.rs.Path;
 @Path("/measurement/unit")
 public class UnitEndpoint extends BaseEndpoint<Unit> {
 
-    /**
-     *
-     */
-//    public UnitEndpoint() {
-//        this.type = UnitEndpoint.class;
-//    }
 }

@@ -18,30 +18,4 @@ import javax.ws.rs.Path;
 @Path("manufacturing/process/{parentId:[0-9]*}/revision")
 public class RevisionEndpoint  extends BaseEndpoint<Revision> {
     
-//    @EJB
-//    private RevisionDao revisionDao;
-//     
-//    public RevisionEndpoint() {
-//        this.type = RevisionEndpoint.class;
-//    }
-//    
-//    /**
-//     *
-//     * @param processId
-//     * @param startPosition
-//     * @param maxResult
-//     * @return
-//     * @throws IOException
-//     */
-//    /*@GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response list(
-//            @Min(value = 1, message = ID_VALIDATION) @PathParam("process") long processId,
-//            @DefaultValue("0") @QueryParam("start") Integer startPosition,
-//            @DefaultValue("10") @QueryParam("max") Integer maxResult)
-//            throws IOException {
-//
-//        return createListResponse(
-//                revisionDao.list(processId)).build();
-//    } */   
 }
