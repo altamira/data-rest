@@ -99,11 +99,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     @Context
     protected HttpHeaders headers;
 
-    /**
-     *
-     */
-    //protected Class<? extends BaseEndpoint<T>> type;
-
     @Inject
     protected BaseDao<T> dao;
 
@@ -148,25 +143,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         return createEntityResponse(
                 dao.find(id)).build();
     }
-
-    /**
-     *
-     * @param startPosition
-     * @param maxResult
-     * @return
-     * @throws IOException
-     */
-    /*@GET
-    @Path("/search")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response search(
-            @DefaultValue("0") @QueryParam("start") Integer startPosition,
-            @DefaultValue("10") @QueryParam("max") Integer maxResult)
-            throws IOException {
-
-        return createListResponse(
-                dao.list(info.getQueryParameters(), startPosition, maxResult)).build();
-    }*/
     
     /**
      *
@@ -254,12 +230,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     public Response corsPreflightForIdPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
         return getCORSHeaders(origin);
     }
-
-    /*@OPTIONS
-    @Path("/search")
-    public Response corsPreflightForSearchPath(@HeaderParam("Origin") String origin) {
-        return getCORSHeaders(origin);
-    }*/
 
     /**
      *
