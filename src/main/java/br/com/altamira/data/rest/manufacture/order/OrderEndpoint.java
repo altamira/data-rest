@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.altamira.data.rest.manufacturing.order;
+package br.com.altamira.data.rest.manufacture.order;
 
-import br.com.altamira.data.model.manufacturing.bom.BOM;
+import br.com.altamira.data.model.manufacture.bom.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
 import javax.ws.rs.Path;
 

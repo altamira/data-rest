@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.altamira.data.rest.manufacturing.bom;
+package br.com.altamira.data.rest.manufacture.bom;
 
-import br.com.altamira.data.dao.manufacturing.bom.BOMDao;
-import br.com.altamira.data.model.manufacturing.bom.BOM;
+import br.com.altamira.data.dao.manufacture.bom.BOMDao;
+import br.com.altamira.data.model.manufacture.bom.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javax.ejb.EJB;

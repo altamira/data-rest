@@ -4,19 +4,29 @@
 		Note that the following is written for JBoss AS 7 -->
   <persistence-unit name="OracleDS" transaction-type="JTA">
     <jta-data-source>java:jboss/datasources/OracleDS</jta-data-source>
-    <class>br.com.altamira.data.model.manufacturing.bom.BOM</class>
-    <class>br.com.altamira.data.model.manufacturing.bom.BOMItem</class>
-    <class>br.com.altamira.data.model.manufacturing.bom.BOMItemPart</class>
-    <class>br.com.altamira.data.model.manufacturing.order.Order</class>
-    <class>br.com.altamira.data.model.manufacturing.order.OrderItem</class>
-    <class>br.com.altamira.data.model.manufacturing.order.OrderItemPart</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Consume</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Operation</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Process</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Produce</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Revision</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Sketch</class>
-    <class>br.com.altamira.data.model.manufacturing.process.Use</class>
+    <class>br.com.altamira.data.model.Measurement</class>
+    <class>br.com.altamira.data.model.Process</class>
+    <class>br.com.altamira.data.model.Property</class>
+    <class>br.com.altamira.data.model.Relation</class>
+    <class>br.com.altamira.data.model.Resource</class>
+    <class>br.com.altamira.data.model.common.Color</class>
+    <class>br.com.altamira.data.model.common.Component</class>
+    <class>br.com.altamira.data.model.common.Material</class>
+    <class>br.com.altamira.data.model.manufacture.Machine</class>
+    <class>br.com.altamira.data.model.manufacture.Tooling</class>
+    <class>br.com.altamira.data.model.manufacture.bom.BOM</class>
+    <class>br.com.altamira.data.model.manufacture.bom.BOMItem</class>
+    <class>br.com.altamira.data.model.manufacture.bom.BOMItemPart</class>
+    <class>br.com.altamira.data.model.manufacture.order.Order</class>
+    <class>br.com.altamira.data.model.manufacture.order.OrderItem</class>
+    <class>br.com.altamira.data.model.manufacture.order.OrderItemPart</class>
+    <class>br.com.altamira.data.model.manufacture.process.Consume</class>
+    <class>br.com.altamira.data.model.manufacture.process.Operation</class>
+    <class>br.com.altamira.data.model.manufacture.process.Process</class>
+    <class>br.com.altamira.data.model.manufacture.process.Produce</class>
+    <class>br.com.altamira.data.model.manufacture.process.Revision</class>
+    <class>br.com.altamira.data.model.manufacture.process.Sketch</class>
+    <class>br.com.altamira.data.model.manufacture.process.Use</class>
     <class>br.com.altamira.data.model.measurement.Magnitude</class>
     <class>br.com.altamira.data.model.measurement.Unit</class>
     <class>br.com.altamira.data.model.purchasing.Material</class>
@@ -26,14 +36,11 @@
     <class>br.com.altamira.data.model.sales.OrderItem</class>
     <class>br.com.altamira.data.model.sales.OrderItemPart</class>
     <class>br.com.altamira.data.model.sales.Product</class>
-    <class>br.com.altamira.data.model.common.Color</class>
-    <class>br.com.altamira.data.model.common.Component</class>
-    <class>br.com.altamira.data.model.common.Material</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/> -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
     </properties>
