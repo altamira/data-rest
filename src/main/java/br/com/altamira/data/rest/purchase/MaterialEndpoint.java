@@ -1,4 +1,4 @@
-package br.com.altamira.data.rest.purchasing;
+package br.com.altamira.data.rest.purchase;
 
 
 import javax.ws.rs.Path;
@@ -10,7 +10,7 @@ import javax.enterprise.context.RequestScoped;
  * @author alessandro.holanda
  */
 @RequestScoped
-@Path("purchasing/material")
-public class MaterialEndpoint extends BaseEndpoint<br.com.altamira.data.model.purchasing.Material> {
+@Path("purchase/material")
+public class MaterialEndpoint extends BaseEndpoint<br.com.altamira.data.model.purchase.Material> {
 
 }

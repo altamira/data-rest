@@ -1,6 +1,6 @@
 package br.com.altamira.data.rest.purchasing.request;
 
-import br.com.altamira.data.model.purchasing.RequestItem;
+import br.com.altamira.data.model.purchase.RequestItem;
 import br.com.altamira.data.rest.BaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;

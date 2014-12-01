@@ -29,9 +29,11 @@
     <class>br.com.altamira.data.model.manufacture.process.Use</class>
     <class>br.com.altamira.data.model.measurement.Magnitude</class>
     <class>br.com.altamira.data.model.measurement.Unit</class>
-    <class>br.com.altamira.data.model.purchasing.Material</class>
-    <class>br.com.altamira.data.model.purchasing.Request</class>
-    <class>br.com.altamira.data.model.purchasing.RequestItem</class>
+    <class>br.com.altamira.data.model.purchase.Ink</class>
+    <class>br.com.altamira.data.model.purchase.Inputs</class>
+    <class>br.com.altamira.data.model.purchase.Material</class>
+    <class>br.com.altamira.data.model.purchase.Request</class>
+    <class>br.com.altamira.data.model.purchase.RequestItem</class>
     <class>br.com.altamira.data.model.sales.Order</class>
     <class>br.com.altamira.data.model.sales.OrderItem</class>
     <class>br.com.altamira.data.model.sales.OrderItemPart</class>
