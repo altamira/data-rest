@@ -7,7 +7,7 @@ package br.com.altamira.data.rest;
 
 import br.com.altamira.data.dao.BaseDao;
 import br.com.altamira.data.serialize.JSonViews;
-import br.com.altamira.data.rest.serialize.NullValueSerializer;
+import br.com.altamira.data.serialize.NullValueSerializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -245,11 +245,11 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     /**
      *
      * @param entity
-     * @param writer
+     * @param objectWriter
      * @return
      * @throws JsonProcessingException
      */
-    protected Response.ResponseBuilder createOkResponse(Object entity, ObjectWriter writer)
+    protected Response.ResponseBuilder createOkResponse(Object entity, ObjectWriter objectWriter)
             throws JsonProcessingException {
 
         ResponseBuilder responseBuilder;
@@ -258,7 +258,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
         responseBuilder.header("Location", info.getRequestUri());
 
-        responseBuilder.entity(writer.writeValueAsString(entity));
+        responseBuilder.entity(objectWriter.writeValueAsString(entity));
 
         if (headers.getHeaderString("Origin") != null
                 && !headers.getHeaderString("Origin").isEmpty()) {
@@ -279,12 +279,15 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     protected Response.ResponseBuilder createCreatedResponse(T entity)
             throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        mapper.registerModule(new Hibernate4Module());
-        mapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        ObjectWriter writer = mapper.writerWithView(JSonViews.EntityView.class);
+        Hibernate4Module hibernateModule = new Hibernate4Module();
+        hibernateModule.enable(Hibernate4Module.Feature.FORCE_LAZY_LOADING);
+        objectMapper.registerModule(hibernateModule);
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+        ObjectWriter writer = objectMapper.writerWithView(JSonViews.EntityView.class);
 
         ResponseBuilder responseBuilder = Response.created(UriBuilder.fromUri(info.getRequestUri()).path(String.valueOf(entity.getId())).build());
 
@@ -330,12 +333,15 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     protected Response.ResponseBuilder createListResponse(Object entity)
             throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        mapper.registerModule(new Hibernate4Module());
-        mapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        ObjectWriter writer = mapper.writerWithView(JSonViews.ListView.class);
+        Hibernate4Module hibernateModule = new Hibernate4Module();
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
+        objectMapper.registerModule(hibernateModule);
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+        ObjectWriter writer = objectMapper.writerWithView(JSonViews.ListView.class);
 
         return createOkResponse(entity, writer);
     }
@@ -349,12 +355,15 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     protected Response.ResponseBuilder createEntityResponse(Object entity)
             throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        mapper.registerModule(new Hibernate4Module());
-        mapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        ObjectWriter writer = mapper.writerWithView(JSonViews.EntityView.class);
+        Hibernate4Module hibernateModule = new Hibernate4Module();
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
+        objectMapper.registerModule(hibernateModule);
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+        ObjectWriter writer = objectMapper.writerWithView(JSonViews.EntityView.class);
 
         return createOkResponse(entity, writer);
     }
@@ -368,12 +377,15 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     protected Response.ResponseBuilder createLobResponse(Object entity)
             throws JsonProcessingException {
 
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        mapper.registerModule(new Hibernate4Module());
-        mapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
-        ObjectWriter writer = mapper.writerWithView(JSonViews.LobView.class);
+        Hibernate4Module hibernateModule = new Hibernate4Module();
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
+        objectMapper.registerModule(hibernateModule);
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+        ObjectWriter writer = objectMapper.writerWithView(JSonViews.LobView.class);
 
         return createOkResponse(entity, writer);
     }

@@ -1,5 +1,6 @@
 package br.com.altamira.data.rest.serialize;
 
+import br.com.altamira.data.serialize.NullValueSerializer;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
