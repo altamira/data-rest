@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -28,6 +29,7 @@ import javax.ws.rs.ext.Provider;
  * @author Alessandro
  */
 @Provider
+@RequestScoped
 public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {
 
     @Inject
@@ -35,9 +37,10 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
 
     @Context
     HttpHeaders headers;
-    
+            
     /**
      *
+     * @param request
      * @param exception
      * @return
      */
@@ -63,7 +66,7 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
         
         message.put("message", causes);
         
-        message.put("trace", Arrays.toString(exception.getStackTrace()));
+        //message.put("trace", Arrays.toString(exception.getStackTrace()));
 
         violations.stream().forEach((violation) -> {
             message.put(violation.getPropertyPath().toString(), violation.getMessage());

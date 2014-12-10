@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.altamira.data.util;
+package br.com.altamira.data.rest.util;
 
 import java.util.logging.Logger;
 
@@ -40,13 +40,13 @@ import javax.persistence.PersistenceContext;
  */
 @Dependent
 public class ResourcesFactory {
-
+    
     // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
     @Produces
     @Default
     @PersistenceContext
     private EntityManager entityManager;
-
+    
     /**
      *
      * @param injectionPoint

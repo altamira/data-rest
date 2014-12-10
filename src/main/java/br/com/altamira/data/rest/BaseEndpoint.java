@@ -6,8 +6,8 @@
 package br.com.altamira.data.rest;
 
 import br.com.altamira.data.dao.BaseDao;
-import br.com.altamira.data.serialize.JSonViews;
-import br.com.altamira.data.serialize.NullValueSerializer;
+import br.com.altamira.data.model.serialize.JSonViews;
+import br.com.altamira.data.model.serialize.NullValueSerializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

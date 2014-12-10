@@ -58,7 +58,7 @@ public class IllegalArgumentExceptionMapper implements ExceptionMapper<IllegalAr
         
         message.put("message", causes);
         
-        message.put("trace", Arrays.toString(exception.getStackTrace()));
+        //message.put("trace", Arrays.toString(exception.getStackTrace()));
         
         Response.ResponseBuilder responseBuilder = Response.status(Response.Status.BAD_REQUEST).entity(message);
 
