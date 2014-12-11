@@ -21,7 +21,7 @@
 
     <groupId>br.com.altamira</groupId>
     <artifactId>data-rest</artifactId>
-    <version>0.7.2-SNAPSHOT</version>
+    <version>0.7.3-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Data RESTful Services</name>
 
