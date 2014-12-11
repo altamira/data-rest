@@ -5,7 +5,7 @@
  */
 package br.com.altamira.data.rest.purchase;
 
-import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.common.MaterialBaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,6 +15,6 @@ import javax.ws.rs.Path;
  */
 @RequestScoped
 @Path("purchase/ink")
-public class InkEndpoint extends BaseEndpoint<br.com.altamira.data.model.purchase.Ink> {
+public class InkEndpoint extends MaterialBaseEndpoint<br.com.altamira.data.model.purchase.Ink> {
     
 }

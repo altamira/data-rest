@@ -51,6 +51,7 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
                 bomDao.updateChecked(id, true)).build();
 
     }
+
     /**
      *
      * @param id

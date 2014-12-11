@@ -5,7 +5,6 @@
  */
 package br.com.altamira.data.rest.common;
 
-import br.com.altamira.data.rest.BaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,6 +14,6 @@ import javax.ws.rs.Path;
  */
 @RequestScoped
 @Path("common/material")
-public class MaterialEndpoint extends BaseEndpoint<br.com.altamira.data.model.common.Material> {
+public class MaterialEndpoint extends MaterialBaseEndpoint<br.com.altamira.data.model.common.Material> {
     
 }

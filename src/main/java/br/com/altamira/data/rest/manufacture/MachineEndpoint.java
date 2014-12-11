@@ -6,7 +6,7 @@
 package br.com.altamira.data.rest.manufacture;
 
 import br.com.altamira.data.model.manufacture.Machine;
-import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.common.MaterialBaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -16,6 +16,6 @@ import javax.ws.rs.Path;
  */
 @RequestScoped
 @Path("/manufacture/machine")
-public class MachineEndpoint extends BaseEndpoint<Machine> {
+public class MachineEndpoint extends MaterialBaseEndpoint<Machine> {
     
 }
