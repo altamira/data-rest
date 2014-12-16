@@ -7,6 +7,7 @@ package br.com.altamira.data.rest;
 
 import br.com.altamira.data.dao.BaseDao;
 import br.com.altamira.data.model.serialize.JSonViews;
+import br.com.altamira.data.model.serialize.NullProvider;
 import br.com.altamira.data.model.serialize.NullValueSerializer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -360,11 +361,14 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         Hibernate4Module hibernateModule = new Hibernate4Module();
         hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
         objectMapper.registerModule(hibernateModule);
+        
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
         ObjectWriter writer = objectMapper.writerWithView(JSonViews.EntityView.class);
 
+        objectMapper.setSerializerProvider(new NullProvider());
+        
         return createOkResponse(entity, writer);
     }
 

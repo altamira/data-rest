@@ -17,11 +17,11 @@
 -- You can use this file to load seed data into the database using SQL statements
 
 
-ALTER SEQUENCE "MEASUREMENT_SEQUENCE" RESTART WITH 2000;
-ALTER SEQUENCE "PROCESS_SEQUENCE" RESTART WITH 2000;
-ALTER SEQUENCE "PROPERTY_SEQUENCE" RESTART WITH 2000;
-ALTER SEQUENCE "RELATION_SEQUENCE" RESTART WITH 2000;
-ALTER SEQUENCE "RESOURCE_SEQUENCE" RESTART WITH 2000;
+ALTER SEQUENCE "MEASUREMENT_SEQUENCE" RESTART WITH 10000;
+ALTER SEQUENCE "PROCESS_SEQUENCE" RESTART WITH 10000;
+ALTER SEQUENCE "PROPERTY_SEQUENCE" RESTART WITH 10000;
+ALTER SEQUENCE "RELATION_SEQUENCE" RESTART WITH 10000;
+ALTER SEQUENCE "RESOURCE_SEQUENCE" RESTART WITH 10000;
 
 INSERT INTO MR_MEASUREMENT (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1,    'br.com.altamira.data.model.measurement.Magnitude', '1416224781473', '2014-11-17 09:46:21.495');
 INSERT INTO MR_MEASUREMENT (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (2,    'br.com.altamira.data.model.measurement.Magnitude', '1416224784029', '2014-11-17 09:46:21.495');
@@ -52,21 +52,6 @@ INSERT INTO MS_UNIT (ID, NAME, SYMBOL, MAGNITUDE) values (107, 'tonelada',      
 INSERT INTO MS_UNIT (ID, NAME, SYMBOL, MAGNITUDE) values (108, 'unidade',       'un',   '3');
 INSERT INTO MS_UNIT (ID, NAME, SYMBOL, MAGNITUDE) values (109, 'peças',         'pç',   '3');
 
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1049, 'br.com.altamira.data.model.manufacture.process.Process',   '1417289819895','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1031, 'br.com.altamira.data.model.manufacture.process.Process',   '1417019817563','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1025, 'br.com.altamira.data.model.manufacture.process.Process',   '1416600352960','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1001, 'br.com.altamira.data.model.manufacture.process.Process',   '1417019839393','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1019, 'br.com.altamira.data.model.manufacture.process.Process',   '1417471735242','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1042, 'br.com.altamira.data.model.manufacture.process.Operation', '1416585330805','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1055, 'br.com.altamira.data.model.manufacture.process.Operation', '1416588696369','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1026, 'br.com.altamira.data.model.manufacture.process.Operation', '1416577304000','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1050, 'br.com.altamira.data.model.manufacture.process.Operation', '1416587768576','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1008, 'br.com.altamira.data.model.manufacture.process.Operation', '1416573564717','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1032, 'br.com.altamira.data.model.manufacture.process.Operation', '1416579679390','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1002, 'br.com.altamira.data.model.manufacture.process.Operation', '1416572320486','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1014, 'br.com.altamira.data.model.manufacture.process.Operation', '1416573511980','2014-11-17 09:46:21.495');
-INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1020, 'br.com.altamira.data.model.manufacture.process.Operation', '1416576952115','2014-11-17 09:46:21.495');
-
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (10,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (11,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (12,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
@@ -87,6 +72,21 @@ INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (26,'b
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (27,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (28,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
 INSERT INTO MR_PROPERTY (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (29,'br.com.altamira.data.model.common.Color','1416224781473','2014-11-17 09:46:21.495');
+
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1049, 'br.com.altamira.data.model.manufacture.process.Process',   '1417289819895','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1031, 'br.com.altamira.data.model.manufacture.process.Process',   '1417019817563','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1025, 'br.com.altamira.data.model.manufacture.process.Process',   '1416600352960','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1001, 'br.com.altamira.data.model.manufacture.process.Process',   '1417019839393','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1019, 'br.com.altamira.data.model.manufacture.process.Process',   '1417471735242','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1042, 'br.com.altamira.data.model.manufacture.process.Operation', '1416585330805','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1055, 'br.com.altamira.data.model.manufacture.process.Operation', '1416588696369','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1026, 'br.com.altamira.data.model.manufacture.process.Operation', '1416577304000','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1050, 'br.com.altamira.data.model.manufacture.process.Operation', '1416587768576','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1008, 'br.com.altamira.data.model.manufacture.process.Operation', '1416573564717','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1032, 'br.com.altamira.data.model.manufacture.process.Operation', '1416579679390','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1002, 'br.com.altamira.data.model.manufacture.process.Operation', '1416572320486','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1014, 'br.com.altamira.data.model.manufacture.process.Operation', '1416573511980','2014-11-17 09:46:21.495');
+INSERT INTO MR_PROCESS (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (1020, 'br.com.altamira.data.model.manufacture.process.Operation', '1416576952115','2014-11-17 09:46:21.495');
 
 INSERT INTO MR_RELATION (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1016','br.com.altamira.data.model.manufacturing.process.Use','1416586290997','2014-11-17 09:46:21.495');
 INSERT INTO MR_RELATION (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1004','br.com.altamira.data.model.manufacturing.process.Use','1417020541235','2014-11-17 09:46:21.495');
@@ -162,6 +162,11 @@ INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1064
 INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1063','br.com.altamira.data.model.manufacture.process.Sketch','1417471860953','2014-11-17 09:46:21.495');
 INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1065','br.com.altamira.data.model.manufacture.process.Sketch','1417471931513','2014-11-17 09:46:21.495');
 INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values ('1061','br.com.altamira.data.model.manufacture.process.Sketch','1417471742451','2014-11-17 09:46:21.495');
+
+-- USE CASE DISTANCIADOR
+--INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (10001,'br.com.altamira.data.model.manufacture.Inputs','1417471742451','2014-11-17 09:46:21.495');
+--INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (10002,'br.com.altamira.data.model.manufacture.Inputs','1417471742451','2014-11-17 09:46:21.495');
+--INSERT INTO MR_RESOURCE (ID, ENTITY_CLASS, LAST_MODIFIED, VERSION) values (10003,'br.com.altamira.data.model.manufacture.Inputs','1417471742451','2014-11-17 09:46:21.495');
 
 INSERT INTO CM_COLOR (ID,CODE,NAME) values ('10','GALV-F+PAD','GALV-F+PAD');
 INSERT INTO CM_COLOR (ID,CODE,NAME) values ('11','GALV-E+COR','GALV-E+COR');
