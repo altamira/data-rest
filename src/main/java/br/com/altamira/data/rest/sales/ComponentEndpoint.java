@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.altamira.data.rest.manufacture.bom;
+package br.com.altamira.data.rest.sales;
 
-import br.com.altamira.data.model.manufacture.bom.Material;
-import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.model.sales.Component;
+import br.com.altamira.data.rest.common.MaterialBaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/manufacturing/bom/material")
-public class MaterialEndpoint extends BaseEndpoint<Material> {
+@Path("sales/component")
+public class ComponentEndpoint extends MaterialBaseEndpoint<Component> {
     
 }
