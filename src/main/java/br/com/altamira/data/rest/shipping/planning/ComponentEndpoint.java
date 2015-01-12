@@ -5,7 +5,7 @@
  */
 package br.com.altamira.data.rest.shipping.planning;
 
-import br.com.altamira.data.model.shipping.planning.Planning;
+import br.com.altamira.data.model.shipping.planning.Component;
 import br.com.altamira.data.rest.BaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
@@ -15,8 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("shipping/planning")
-public class PlanningEndpoint extends BaseEndpoint<Planning> {
+@Path("/shipping/planning/{bom:[0-9]*}/item/{parentId:[0-9]*}/component")
+public class ComponentEndpoint extends BaseEndpoint<Component> {
 
 }
-
