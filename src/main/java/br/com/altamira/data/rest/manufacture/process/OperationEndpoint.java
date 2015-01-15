@@ -50,40 +50,9 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
         ).build();
     }
     
-        /**
-     *
-     * @param id
-     * @param variable
-     * @return
-     * @throws JsonProcessingException
-     */
-    @POST
-    @Path(value = "/{id:[0-9]*}/variable")
-    @Produces(value = MediaType.APPLICATION_JSON)
-    public Response variable(
-            @Min(value = 0, message = ID_VALIDATION) @PathParam(value = "id") long id,
-            Map<String, Measure> variable)
-            throws JsonProcessingException {
-
-        ((OperationDao) dao).calcule(
-                        ((OperationDao) dao).find(id), 
-                        variable, 
-                        info.getPathParameters());
-                
-        return createEntityResponse(
-                ((OperationDao) dao).getVariable()
-        ).build();
-    }
-    
     @OPTIONS
     @Path("/{id:[0-9]*}/calcule")
     public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/variable")
-    public Response corsPreflightForUncheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
         return getCORSHeaders(origin);
     }
 }
