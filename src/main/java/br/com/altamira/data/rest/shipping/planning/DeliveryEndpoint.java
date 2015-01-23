@@ -34,7 +34,7 @@ public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
 
     /**
      *
-     * @param entities
+     * @param delivery
      * @return
      * @throws JsonProcessingException
      */
@@ -43,34 +43,34 @@ public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response join(
-            @NotNull List<Delivery> entities)
+            @NotNull List<Delivery> delivery)
             throws JsonProcessingException {
 
         return createEntityResponse(
-                ((DeliveryDao) dao).join(entities)).build();
+                ((DeliveryDao) dao).join(delivery)).build();
 
     }
 
     /**
      *
      * @param id
-     * @param entities
+     * @param delivery
      * @return
      * @throws JsonProcessingException
      */
     @POST
-    @Path("/{id:[0-9]*}/split")
+    @Path("/{id:[0-9]*}/divide")
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response split(
             @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id,
-            @NotNull List<Delivery> entities)
+            @NotNull List<Delivery> delivery)
             throws JsonProcessingException {
 
         Delivery entity = ((DeliveryDao) dao).find(id);
 
         return createEntityResponse(
-                ((DeliveryDao) dao).split(entity, entities)).build();
+                ((DeliveryDao) dao).divide(entity, delivery)).build();
 
     }
 
@@ -81,7 +81,7 @@ public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
     }
 
     @OPTIONS
-    @Path("/{id:[0-9]*}/split")
+    @Path("/{id:[0-9]*}/divide")
     public Response corsPreflightForSplitPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
         return getCORSHeaders(origin);
     }
