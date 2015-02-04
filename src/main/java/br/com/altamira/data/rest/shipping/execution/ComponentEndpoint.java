@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.altamira.data.model.shipping.execution;
+package br.com.altamira.data.rest.shipping.execution;
 
+import br.com.altamira.data.model.shipping.execution.Component;
 import br.com.altamira.data.rest.BaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
@@ -14,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/shipping/execution/delivered")
-public class DeliveredEndpoint extends BaseEndpoint<Delivered> {
-    
+@Path("/shipping/execution/{bom:[0-9]*}/item/{parentId:[0-9]*}/component")
+public class ComponentEndpoint extends BaseEndpoint<Component> {
+
 }
