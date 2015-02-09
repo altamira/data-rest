@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/shipping/planning/{bom:[0-9]*}/item/{item:[0-9]*}/component/{parentId:[0-9]*}/delivery")
+@Path("/shipping/execution/{bom:[0-9]*}/item/{item:[0-9]*}/component/{parentId:[0-9]*}/delivery")
 public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
 
 
