@@ -10,7 +10,7 @@ import javax.enterprise.context.RequestScoped;
  * @author alessandro.holanda
  */
 @RequestScoped
-@Path("purchase/material")
-public class MaterialEndpoint extends MaterialBaseEndpoint<br.com.altamira.data.model.purchase.Material> {
+@Path("purchase/steel")
+public class SteelEndpoint extends MaterialBaseEndpoint<br.com.altamira.data.model.purchase.Steel> {
 
 }

@@ -338,7 +338,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         ObjectMapper objectMapper = new ObjectMapper();
 
         Hibernate4Module hibernateModule = new Hibernate4Module();
-        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, false);
         hibernateModule.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
         objectMapper.registerModule(hibernateModule);
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
@@ -361,8 +361,9 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         ObjectMapper objectMapper = new ObjectMapper();
 
         Hibernate4Module hibernateModule = new Hibernate4Module();
-        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, true);
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, false);
         hibernateModule.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
+        hibernateModule.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true);
         objectMapper.registerModule(hibernateModule);
         
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
