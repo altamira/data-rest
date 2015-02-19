@@ -9,7 +9,6 @@ import br.com.altamira.data.dao.manufacture.bom.BOMDao;
 import br.com.altamira.data.model.manufacture.bom.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.Min;
 import javax.ws.rs.Consumes;
@@ -30,9 +29,6 @@ import javax.ws.rs.core.Response;
 @Path("/manufacturing/bom")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
-    @EJB
-    private BOMDao bomDao;
-
     /**
      *
      * @param id
@@ -47,9 +43,9 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id)
             throws JsonProcessingException {
 
-        return createEntityResponse(
-                bomDao.updateChecked(id, true)).build();
-
+        ((BOMDao) dao).updateChecked(id, true);
+        
+        return createNoContentResponse().build();
     }
 
     /**
@@ -66,9 +62,9 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             @Min(value = 1, message = ID_VALIDATION) @PathParam(value = "id") long id)
             throws JsonProcessingException {
 
-        return createEntityResponse(
-                bomDao.updateChecked(id, false)).build();
-
+        ((BOMDao) dao).updateChecked(id, false);
+        
+        return createNoContentResponse().build();
     }
     
     @OPTIONS
