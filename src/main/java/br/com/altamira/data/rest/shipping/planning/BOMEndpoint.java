@@ -52,9 +52,9 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             @NotNull List<Date> dates)
             throws JsonProcessingException {
 
-        ((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
+        //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
 
-        return createNoContentResponse().build();
+        return createEntityResponse(((BOMDao) dao).replaceRemainingDeliveryDates(id, dates)).build();
     }
 
     /**
