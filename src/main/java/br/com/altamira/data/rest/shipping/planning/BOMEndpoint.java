@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,6 +37,12 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 @Path("/shipping/planning")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
+
+    @OPTIONS
+    @Path("/{id:[0-9]*}/delivery")
+    public Response corsPreflightForReplaceDeliveryDates(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
+        return getCORSHeaders(origin);
+    }
 
     /**
      * Replace delivery dates in batch
@@ -53,10 +61,15 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             throws JsonProcessingException {
 
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
-
         return createEntityResponse(((BOMDao) dao).replaceRemainingDeliveryDates(id, dates)).build();
     }
 
+    @OPTIONS
+    @Path("/remaining")
+    public Response corsPreflightForlistRemaining(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
+        return getCORSHeaders(origin);
+    }
+    
     /**
      *
      * @param startPosition
@@ -73,9 +86,9 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             throws IOException {
 
         MultivaluedMap<String, String> map = info.getPathParameters();
-        
+
         map.putAll(info.getQueryParameters());
-        
+
         return createListResponse(
                 ((BOMDao) dao).listRemaining(map, startPosition, maxResult)).build();
     }
