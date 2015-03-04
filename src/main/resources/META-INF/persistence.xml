@@ -14,11 +14,17 @@
     <class>br.com.altamira.data.model.common.Material</class>
     <class>br.com.altamira.data.model.common.MaterialAlias</class>
     <class>br.com.altamira.data.model.manufacture.Machine</class>
+    <class>br.com.altamira.data.model.manufacture.Operation</class>
     <class>br.com.altamira.data.model.manufacture.Tooling</class>
     <class>br.com.altamira.data.model.manufacture.bom.BOM</class>
-    <class>br.com.altamira.data.model.manufacture.bom.Item</class>
     <class>br.com.altamira.data.model.manufacture.bom.Component</class>
     <class>br.com.altamira.data.model.manufacture.bom.Delivery</class>
+    <class>br.com.altamira.data.model.manufacture.bom.Item</class>
+    <class>br.com.altamira.data.model.manufacture.execution.BOM</class>
+    <class>br.com.altamira.data.model.manufacture.execution.Component</class>
+    <class>br.com.altamira.data.model.manufacture.execution.Delivered</class>
+    <class>br.com.altamira.data.model.manufacture.execution.Delivery</class>
+    <class>br.com.altamira.data.model.manufacture.execution.Item</class>
     <class>br.com.altamira.data.model.manufacture.order.Order</class>
     <class>br.com.altamira.data.model.manufacture.order.OrderItem</class>
     <class>br.com.altamira.data.model.manufacture.order.OrderItemPart</class>
@@ -36,6 +42,8 @@
     <class>br.com.altamira.data.model.purchase.Material</class>
     <class>br.com.altamira.data.model.purchase.Request</class>
     <class>br.com.altamira.data.model.purchase.RequestItem</class>
+    <class>br.com.altamira.data.model.purchase.Steel</class>
+    <class>br.com.altamira.data.model.sales.Component</class>
     <class>br.com.altamira.data.model.sales.Order</class>
     <class>br.com.altamira.data.model.sales.OrderItem</class>
     <class>br.com.altamira.data.model.sales.OrderItemPart</class>
@@ -45,18 +53,16 @@
     <class>br.com.altamira.data.model.security.Permission</class>
     <class>br.com.altamira.data.model.security.Profile</class>
     <class>br.com.altamira.data.model.security.User</class>
-    <class>br.com.altamira.data.model.sales.Component</class>
+    <class>br.com.altamira.data.model.shipping.execution.BOM</class>
+    <class>br.com.altamira.data.model.shipping.execution.Component</class>
+    <class>br.com.altamira.data.model.shipping.execution.Delivered</class>
+    <class>br.com.altamira.data.model.shipping.execution.Delivery</class>
+    <class>br.com.altamira.data.model.shipping.execution.Item</class>
+    <class>br.com.altamira.data.model.shipping.execution.PackingList</class>
     <class>br.com.altamira.data.model.shipping.planning.BOM</class>
     <class>br.com.altamira.data.model.shipping.planning.Component</class>
     <class>br.com.altamira.data.model.shipping.planning.Delivery</class>
     <class>br.com.altamira.data.model.shipping.planning.Item</class>
-    <class>br.com.altamira.data.model.shipping.execution.Delivered</class>
-    <class>br.com.altamira.data.model.shipping.execution.BOM</class>
-    <class>br.com.altamira.data.model.shipping.execution.Component</class>
-    <class>br.com.altamira.data.model.shipping.execution.Delivery</class>
-    <class>br.com.altamira.data.model.shipping.execution.Item</class>
-    <class>br.com.altamira.data.model.purchase.Steel</class>
-    <class>br.com.altamira.data.model.shipping.execution.PackingList</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
