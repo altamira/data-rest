@@ -2,8 +2,8 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <!-- TODO: check if you really want to use the process engine datasource. 
 		Note that the following is written for JBoss AS 7 -->
-  <persistence-unit name="OracleDS" transaction-type="JTA">
-    <jta-data-source>java:jboss/datasources/OracleDS</jta-data-source>
+  <persistence-unit name="oracle-se1-data" transaction-type="JTA">
+    <jta-data-source>java:jboss/datasources/oracle-se1-data-0-8-0</jta-data-source>
     <class>br.com.altamira.data.model.Measurement</class>
     <class>br.com.altamira.data.model.Process</class>
     <class>br.com.altamira.data.model.Property</class>
