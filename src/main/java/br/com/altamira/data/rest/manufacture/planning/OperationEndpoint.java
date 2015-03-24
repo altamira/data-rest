@@ -5,8 +5,8 @@
  */
 package br.com.altamira.data.rest.manufacture.planning;
 
-import br.com.altamira.data.dao.manufacture.planning.BOMDao;
-import br.com.altamira.data.model.manufacture.planning.BOM;
+import br.com.altamira.data.dao.manufacture.planning.OperationDao;
+import br.com.altamira.data.model.manufacture.planning.Operation;
 import br.com.altamira.data.rest.BaseEndpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javax.enterprise.context.RequestScoped;
@@ -24,13 +24,14 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * Bill of Material rest services
+ * @author Alessandro
  */
 @RequestScoped
-@Path("/manufacture/planning/{id:[0-9]*}/bom")
-public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
+@Path("/manufacture/planning/operation")
+public class OperationEndpoint extends BaseEndpoint<Operation> {
 
     @OPTIONS
+    @Path("/{id:[0-9]*}/bom")
     public Response corsPreflightForListBOM(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
         return getCORSHeaders(origin);
     }
@@ -44,6 +45,7 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
      * @throws JsonProcessingException
      */
     @GET
+    @Path("/{id:[0-9]*}/bom")
     @Consumes(value = MediaType.APPLICATION_JSON)
     public Response ListBOM(
             @DefaultValue("0") @QueryParam("start") Integer startPosition,
@@ -55,6 +57,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
         map.putAll(info.getQueryParameters());
         
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
-        return createEntityResponse(((BOMDao) dao).list(map, startPosition, maxResult)).build();
-    }
+        return createEntityResponse(((OperationDao) dao).listBOM(map, startPosition, maxResult)).build();
+    }    
 }

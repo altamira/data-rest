@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/manufacture/planning/order")
+@Path("/manufacture/planning")
 public class OrderEndpoint extends BaseEndpoint<Order> {
-    
+
 }

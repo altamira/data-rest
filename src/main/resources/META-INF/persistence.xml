@@ -25,6 +25,9 @@
     <class>br.com.altamira.data.model.manufacture.execution.Delivered</class>
     <class>br.com.altamira.data.model.manufacture.execution.Delivery</class>
     <class>br.com.altamira.data.model.manufacture.execution.Item</class>
+    <class>br.com.altamira.data.model.manufacture.order.Order</class>
+    <class>br.com.altamira.data.model.manufacture.order.OrderItem</class>
+    <class>br.com.altamira.data.model.manufacture.order.OrderItemPart</class>
     <class>br.com.altamira.data.model.manufacture.process.Consume</class>
     <class>br.com.altamira.data.model.manufacture.process.Operation</class>
     <class>br.com.altamira.data.model.manufacture.process.Process</class>
@@ -68,6 +71,7 @@
     <class>br.com.altamira.data.model.manufacture.planning.Item</class>
     <class>br.com.altamira.data.model.manufacture.planning.Order</class>
     <class>br.com.altamira.data.model.manufacture.planning.Produce</class>
+    <class>br.com.altamira.data.model.manufacture.planning.Operation</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
