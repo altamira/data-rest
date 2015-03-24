@@ -66,6 +66,11 @@
     <class>br.com.altamira.data.model.shipping.planning.Item</class>
     <class>br.com.altamira.data.model.shipping.planning.Status</class>
     <class>br.com.altamira.data.model.shipping.planning.Transport</class>
+    <class>br.com.altamira.data.model.manufacture.planning.BOM</class>
+    <class>br.com.altamira.data.model.manufacture.planning.Component</class>
+    <class>br.com.altamira.data.model.manufacture.planning.Item</class>
+    <class>br.com.altamira.data.model.manufacture.planning.Order</class>
+    <class>br.com.altamira.data.model.manufacture.planning.Produce</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
