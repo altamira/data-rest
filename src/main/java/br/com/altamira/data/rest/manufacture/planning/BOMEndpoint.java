@@ -55,6 +55,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
         map.putAll(info.getQueryParameters());
         
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
-        return createEntityResponse(((BOMDao) dao).list(map, startPosition, maxResult)).build();
+        return createListResponse(((BOMDao) dao).list(map, startPosition, maxResult)).build();
     }
 }
