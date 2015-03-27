@@ -57,6 +57,6 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
         map.putAll(info.getQueryParameters());
         
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
-        return createEntityResponse(((OperationDao) dao).listBOM(map, startPosition, maxResult)).build();
+        return createListResponse(((OperationDao) dao).listBOM(map, startPosition, maxResult)).build();
     }    
 }
