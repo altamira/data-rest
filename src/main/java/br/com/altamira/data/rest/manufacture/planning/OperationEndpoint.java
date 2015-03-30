@@ -106,4 +106,27 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
 
     	return createListResponse(((OperationDao) dao).listBOMItemComponent(map, startPosition, maxResult)).build();
     }
+    
+    /**
+     * Replace delivery dates in batch
+     *
+     * @param startPosition
+     * @param maxResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GET
+    @Path("/summary")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response ListSummary(
+    		@DefaultValue("0") @QueryParam("start") Integer startPosition,
+    		@DefaultValue("10") @QueryParam("max") Integer maxResult)
+    				throws JsonProcessingException {
+
+    	MultivaluedMap<String, String> map = info.getPathParameters();
+
+    	map.putAll(info.getQueryParameters());
+
+    	return createListResponse(((OperationDao) dao).listSummary(map, startPosition, maxResult)).build();
+    }
 }
