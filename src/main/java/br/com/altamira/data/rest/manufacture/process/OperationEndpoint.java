@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
  * @author alessandro.holanda
  */
 @RequestScoped
-@Path("manufacturing/process/{parentId:[0-9]*}/operation")
+@Path("manufacture/process/{parentId:[0-9]*}/operation")
 public class OperationEndpoint extends BaseEndpoint<Operation> {
 
     /**

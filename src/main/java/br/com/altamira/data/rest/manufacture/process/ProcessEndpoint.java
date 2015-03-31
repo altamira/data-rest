@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Alessandro
  */
-@Path("manufacturing/process")
+@Path("manufacture/process")
 @RequestScoped
 public class ProcessEndpoint extends BaseEndpoint<Process> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 

@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author alessandro.holanda
  */
 @RequestScoped
-@Path("manufacturing/process/{process:[0-9]*}/operation/{parentId:[0-9]*}/produce")
+@Path("manufacture/process/{process:[0-9]*}/operation/{parentId:[0-9]*}/produce")
 public class ProduceEndpoint extends BaseEndpoint<Produce> {
 
 }

@@ -14,7 +14,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("manufacturing/process/{process:[0-9]*}/operation/{parentId:[0-9]*}/consume")
+@Path("manufacture/process/{process:[0-9]*}/operation/{parentId:[0-9]*}/consume")
 public class ConsumeEndpoint extends BaseEndpoint<br.com.altamira.data.model.manufacture.process.Consume> {
 
 }

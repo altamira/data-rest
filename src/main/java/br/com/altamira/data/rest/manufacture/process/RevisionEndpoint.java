@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("manufacturing/process/{parentId:[0-9]*}/revision")
+@Path("manufacture/process/{parentId:[0-9]*}/revision")
 public class RevisionEndpoint  extends BaseEndpoint<Revision> {
     
 }
