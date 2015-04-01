@@ -71,7 +71,7 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
     @GET
     @Path("/{id:[0-9]*}/bom/{id:[0-9]*}/item")
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response ListItem(
+    public Response ListBOMItem(
             @DefaultValue("0") @QueryParam("start") Integer startPosition,
             @DefaultValue("10") @QueryParam("max") Integer maxResult)
             throws JsonProcessingException {
@@ -93,7 +93,7 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
     @GET
     @Path("/{id:[0-9]*}/bom/{id:[0-9]*}/item/{id:[0-9]*}/component")
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response ListComponent(
+    public Response ListBOMItemComponent(
     		@DefaultValue("0") @QueryParam("start") Integer startPosition,
     		@DefaultValue("10") @QueryParam("max") Integer maxResult)
     				throws JsonProcessingException {
@@ -127,4 +127,33 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
 
     	return createListResponse(((ProcessDao) dao).listSummary(map, startPosition, maxResult)).build();
     }
+
+    @OPTIONS
+    @Path("/{id:[0-9]*}/component")
+    public Response corsPreflightForListComponent(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
+        return getCORSHeaders(origin);
+    }
+
+    /**
+     * Replace delivery dates in batch
+     *
+     * @param startPosition
+     * @param maxResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GET
+    @Path("/{id:[0-9]*}/component")
+    @Consumes(value = MediaType.APPLICATION_JSON)
+    public Response ListComponent(
+            @DefaultValue("0") @QueryParam("start") Integer startPosition,
+            @DefaultValue("10") @QueryParam("max") Integer maxResult)
+            throws JsonProcessingException {
+
+        MultivaluedMap<String, String> map = info.getPathParameters();
+
+        map.putAll(info.getQueryParameters());
+        
+        return createListResponse(((ProcessDao) dao).listComponent(map, startPosition, maxResult)).build();
+    }     
 }
