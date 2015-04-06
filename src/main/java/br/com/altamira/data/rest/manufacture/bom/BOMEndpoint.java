@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
  * Bill of Material rest services
  */
 @RequestScoped
-@Path("/manufacturing/bom")
+@Path("/manufacture/bom")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
     /**

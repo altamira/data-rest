@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
-@Path("/manufacturing/bom/{parentId:[0-9]*}/item")
+@Path("/manufacture/bom/{parentId:[0-9]*}/item")
 public class ItemEndpoint extends BaseEndpoint<Item> {
 
 }
