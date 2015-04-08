@@ -211,7 +211,7 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
     	return createEntityResponse(((ProcessDao) dao).getProduceById(map)).build();
     }
 
-    @PUT
+    /*@PUT
     @Path(value = "/{id:[0-9]*}/bom/{id:[0-9]*}/item/{id:[0-9]*}/component/{id:[0-9]*}/produce/{id:[0-9]*}")
     public Response updateProduce(@PathParam(value = "id") long id, Produce entity)
     		throws JsonProcessingException {
@@ -241,5 +241,5 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
     	produceDao.remove(id);
 
     	return createNoContentResponse().build();
-    }
+    }*/
 }

@@ -53,7 +53,7 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
         MultivaluedMap<String, String> map = info.getPathParameters();
 
         map.putAll(info.getQueryParameters());
-        
+
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
         return createListResponse(((BOMDao) dao).list(map, startPosition, maxResult)).build();
     }

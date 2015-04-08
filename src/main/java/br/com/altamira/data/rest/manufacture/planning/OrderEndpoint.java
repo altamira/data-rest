@@ -28,28 +28,28 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @RequestScoped
 @Path("/manufacture/planning")
 public class OrderEndpoint extends BaseEndpoint<Order> {
-	
-	//ALTAMIRA-175 : Manufacture Planning - create list order's operations API
-	/**
-	 *
-	 * @param startPosition
-	 * @param maxResult
-	 * @return
-	 * @throws JsonProcessingException
-	 */
-	@GET
-	@Path("/{id:[0-9]*}/operation")
-	@Produces(value = MediaType.APPLICATION_JSON)
-	public Response ListOperation(
-			@DefaultValue("0") @QueryParam("start") Integer startPosition,
-			@DefaultValue("10") @QueryParam("max") Integer maxResult)
-					throws JsonProcessingException {
 
-		MultivaluedMap<String, String> map = info.getPathParameters();
+    //ALTAMIRA-175 : Manufacture Planning - create list order's operations API
+    /**
+     *
+     * @param startPosition
+     * @param maxResult
+     * @return
+     * @throws JsonProcessingException
+     */
+    @GET
+    @Path("/{id:[0-9]*}/operation")
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response ListOperation(
+            @DefaultValue("0") @QueryParam("start") Integer startPosition,
+            @DefaultValue("10") @QueryParam("max") Integer maxResult)
+            throws JsonProcessingException {
 
-		map.putAll(info.getQueryParameters());
+        MultivaluedMap<String, String> map = info.getPathParameters();
 
-		return createEntityResponse(((OrderDao) dao).listOperation(map, startPosition, maxResult)).build();
-	}
+        map.putAll(info.getQueryParameters());
+
+        return createEntityResponse(((OrderDao) dao).listOperation(map, startPosition, maxResult)).build();
+    }
 
 }
