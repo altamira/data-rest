@@ -1,10 +1,17 @@
 package br.com.altamira.data.rest;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -26,7 +33,22 @@ public class PermissionInerceptor implements ContainerRequestFilter{
 	/**
 	 * 
 	 */
-	private static final String RESOURCE = "BOM";
+	private static final String PERMISSION_GET = "READ";
+	
+	/**
+	 * 
+	 */
+	private static final String PERMISSION_POST = "CREATE";
+	
+	/**
+	 * 
+	 */
+	private static final String PERMISSION_PUT = "UPDATE";
+	
+	/**
+	 * 
+	 */
+	private static final String PERMISSION_DELETE = "DELETE";
 	
 	@Context
 	private ResourceInfo resourceInfo;
@@ -39,16 +61,53 @@ public class PermissionInerceptor implements ContainerRequestFilter{
 			String token = requestContext.getUriInfo().getQueryParameters().get("token").get(0);
 			System.out.println(token);
 
-			//TODO - Retrieve the @Path value for the method & pass it as RESOURCE_NAME
-			/*Method method = resourceInfo.getResourceMethod();
+			Method method = resourceInfo.getResourceMethod();
 			
-			Annotation[] annotations = method.getDeclaredAnnotations();
-			for(Annotation an : annotations)
+			StringBuffer resource = new StringBuffer();
+			// Retrieve class' @Path value
+			if(resourceInfo.getResourceClass().isAnnotationPresent(Path.class))
 			{
-				System.out.println(an.toString());
-			}*/
+				resource.append(resourceInfo.getResourceClass().getAnnotation(Path.class).value());
+			}
 			
-			Response authResponse = checkAuth(token);
+			// Retrieve method's @Path value
+			if(method.isAnnotationPresent(Path.class))
+			{
+				String methodPath = method.getAnnotation(Path.class).value(); 
+				if(methodPath.startsWith("/"))
+				{
+					resource.append(methodPath);
+				}
+				else
+				{
+					resource.append("/"+methodPath);
+				}
+			}
+			
+			//To opt out for Endpoint class-name as resource, use below:
+			/*String resource = resourceInfo.getResourceClass().getName();*/
+			
+			// Retrieve permission type
+			String permission = null;
+			
+			if(method.isAnnotationPresent(GET.class))
+			{
+				permission = PERMISSION_GET;
+			}
+			else if(method.isAnnotationPresent(POST.class))
+			{
+				permission = PERMISSION_POST;
+			}
+			else if(method.isAnnotationPresent(PUT.class))
+			{
+				permission = PERMISSION_PUT;
+			}
+			else if(method.isAnnotationPresent(DELETE.class))
+			{
+				permission = PERMISSION_DELETE;
+			}
+			
+			Response authResponse = checkAuth(token, resource.toString(), permission);
 			if(authResponse.getStatus() != 200)
 			{
 				String message = authResponse.readEntity(HashMap.class).get("message").toString();
@@ -69,15 +128,19 @@ public class PermissionInerceptor implements ContainerRequestFilter{
 	 * @param Token String
 	 * @return Response
 	 */
-	public Response checkAuth(String token) {
+	public Response checkAuth(String token, String resource, String permission) {
 		Response response = null;
 
 		try {
-			String url = AUTH_URL + "?token=" + token + "&resource=" + RESOURCE + "&permission=READ";
+			String url = AUTH_URL + "?token=" + token + "&permission=" + permission;
 			Client client = ClientBuilder.newClient();
 			WebTarget webTarget = client.target(url);
 			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-			return invocationBuilder.get();
+			
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("resource", resource);
+			
+			return invocationBuilder.post(Entity.json(map));
 		} catch (Exception e) {            
 			System.out.println(e.getMessage());
 
