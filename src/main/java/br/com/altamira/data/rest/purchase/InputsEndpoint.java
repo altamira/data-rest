@@ -5,6 +5,7 @@
  */
 package br.com.altamira.data.rest.purchase;
 
+import br.com.altamira.data.rest.Resource;
 import br.com.altamira.data.rest.common.MaterialBaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
@@ -14,7 +15,8 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "PURCHASE")
 @Path("purchase/inputs")
 public class InputsEndpoint extends MaterialBaseEndpoint<br.com.altamira.data.model.purchase.Inputs> {
-    
+
 }

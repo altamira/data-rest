@@ -8,6 +8,7 @@ package br.com.altamira.data.rest.shipping.execution;
 import br.com.altamira.data.dao.shipping.execution.BOMDao;
 import br.com.altamira.data.model.shipping.execution.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import java.io.IOException;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.DefaultValue;
@@ -27,6 +28,7 @@ import javax.ws.rs.core.Response;
  * Bill of Material rest services
  */
 @RequestScoped
+@Resource(name = "SHIPPING_EXECUTION")
 @Path("/shipping/execution")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 

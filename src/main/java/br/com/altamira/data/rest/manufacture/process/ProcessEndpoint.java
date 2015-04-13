@@ -7,6 +7,7 @@ import br.com.altamira.data.model.measurement.Measure;
 
 import br.com.altamira.data.rest.BaseEndpoint;
 import static br.com.altamira.data.rest.BaseEndpoint.ID_VALIDATION;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("manufacture/process")
 @RequestScoped
+@Resource(name = "MANUFACTURE_PROCESS")
 public class ProcessEndpoint extends BaseEndpoint<Process> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
     /**
@@ -45,13 +47,13 @@ public class ProcessEndpoint extends BaseEndpoint<Process> /*implements Endpoint
 
         return createEntityResponse(
                 ((ProcessDao) dao).calcule(
-                        ((ProcessDao) dao).find(id), 
-                        variable, 
+                        ((ProcessDao) dao).find(id),
+                        variable,
                         info.getPathParameters()
                 )
         ).build();
     }
-    
+
     @OPTIONS
     @Path("/{id:[0-9]*}/calcule")
     public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {

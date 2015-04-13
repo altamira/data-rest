@@ -6,6 +6,7 @@
 package br.com.altamira.data.rest.sales;
 
 import br.com.altamira.data.model.sales.Component;
+import br.com.altamira.data.rest.Resource;
 import br.com.altamira.data.rest.common.MaterialBaseEndpoint;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
@@ -15,6 +16,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "SALES")
 @Path("sales/component")
 public class ComponentEndpoint extends MaterialBaseEndpoint<Component> {
     

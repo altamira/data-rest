@@ -8,6 +8,7 @@ package br.com.altamira.data.rest.manufacture.bom;
 import br.com.altamira.data.dao.manufacture.bom.BOMDao;
 import br.com.altamira.data.model.manufacture.bom.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javax.enterprise.context.RequestScoped;
 import javax.validation.constraints.Min;
@@ -26,6 +27,7 @@ import javax.ws.rs.core.Response;
  * Bill of Material rest services
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_BOM")
 @Path("/manufacture/bom")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
@@ -44,7 +46,7 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             throws JsonProcessingException {
 
         ((BOMDao) dao).updateChecked(id, true);
-        
+
         return createNoContentResponse().build();
     }
 
@@ -63,10 +65,10 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
             throws JsonProcessingException {
 
         ((BOMDao) dao).updateChecked(id, false);
-        
+
         return createNoContentResponse().build();
     }
-    
+
     @OPTIONS
     @Path("/{id:[0-9]*}/checked")
     public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {

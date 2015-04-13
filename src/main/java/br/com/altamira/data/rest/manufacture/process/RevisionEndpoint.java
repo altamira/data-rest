@@ -7,6 +7,7 @@ package br.com.altamira.data.rest.manufacture.process;
 
 import br.com.altamira.data.model.manufacture.process.Revision;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,7 +16,8 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PROCESS")
 @Path("manufacture/process/{parentId:[0-9]*}/revision")
-public class RevisionEndpoint  extends BaseEndpoint<Revision> {
-    
+public class RevisionEndpoint extends BaseEndpoint<Revision> {
+
 }

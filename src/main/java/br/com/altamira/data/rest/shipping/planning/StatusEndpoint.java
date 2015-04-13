@@ -7,6 +7,7 @@ package br.com.altamira.data.rest.shipping.planning;
 
 import br.com.altamira.data.model.shipping.planning.Status;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,6 +16,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "SHIPPING_PLANNING")
 @Path("/shipping/planning/status")
 public class StatusEndpoint extends BaseEndpoint<Status> {
     

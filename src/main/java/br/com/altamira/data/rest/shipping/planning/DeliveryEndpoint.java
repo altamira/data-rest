@@ -9,6 +9,7 @@ import br.com.altamira.data.dao.shipping.planning.DeliveryDao;
 import br.com.altamira.data.model.shipping.planning.Delivery;
 import br.com.altamira.data.rest.BaseEndpoint;
 import static br.com.altamira.data.rest.BaseEndpoint.ID_VALIDATION;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -29,6 +30,7 @@ import javax.ws.rs.core.Response;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "SHIPPING_PLANNING")
 @Path("/shipping/planning/{bom:[0-9]*}/item/{item:[0-9]*}/component/{parentId:[0-9]*}/delivery")
 public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
 
