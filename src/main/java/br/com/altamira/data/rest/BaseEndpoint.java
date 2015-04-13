@@ -35,6 +35,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -87,6 +91,11 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
      *
      */
     public static final String ID_NOT_NULL_VALIDATION = "Entity id can't be null or zero.";
+    
+    /**
+     * 
+     */
+    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
 
     /**
      *
@@ -408,4 +417,26 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
                 .getGenericSuperclass()).getActualTypeArguments()[0];
         return clazz;
     }
+    
+    /**
+	 * Check the Auth Token
+	 * @param Token String
+	 * @return Response
+	 */
+	public static Response getUserDetailsByToken(String token) {
+		Response response = null;
+
+		try {
+			String url = TOKEN_URL + "?token=" + token;
+			Client client = ClientBuilder.newClient();
+			WebTarget webTarget = client.target(url);
+			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+			response = invocationBuilder.get();
+			return response;
+		} catch (Exception e) {            
+			System.out.println(e.getMessage());
+			
+		}
+		return response;
+	}
 }
