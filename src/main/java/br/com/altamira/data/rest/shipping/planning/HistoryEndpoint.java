@@ -40,7 +40,7 @@ public class HistoryEndpoint extends BaseEndpoint<History> {
     /**
      * 
      */
-    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
+    private static final String TOKEN_URL = "http://data.altamira.com.br/security-oauth2-0.2.0-SNAPSHOT/authz/token";
 	
 	@Override
 	@POST

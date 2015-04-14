@@ -27,18 +27,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -391,26 +385,4 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         return clazz;
     }
 
-    /**
-     * Check the Auth Token
-     *
-     * @param Token String
-     * @return Response
-     */
-    public static Response getUserDetailsByToken(String token) {
-        Response response = null;
-
-        try {
-            String url = TOKEN_URL + "?token=" + token;
-            Client client = ClientBuilder.newClient();
-            WebTarget webTarget = client.target(url);
-            Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-            response = invocationBuilder.get();
-            return response;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-        }
-        return response;
-    }
 }
