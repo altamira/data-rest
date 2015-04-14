@@ -76,15 +76,4 @@ public class DeliveryEndpoint extends BaseEndpoint<Delivery> {
 
     }
 
-    @OPTIONS
-    @Path("/join")
-    public Response corsPreflightForJoinPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/divide")
-    public Response corsPreflightForSplitPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 }

@@ -35,12 +35,6 @@ import javax.ws.rs.core.Response;
 @Path("/manufacture/planning/operation")
 public class OperationEndpoint extends BaseEndpoint<Operation> {
 
-    @OPTIONS
-    @Path("/{id:[0-9]*}/bom")
-    public Response corsPreflightForListBOM(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
     /**
      * Replace delivery dates in batch
      *

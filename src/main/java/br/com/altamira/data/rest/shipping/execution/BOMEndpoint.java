@@ -32,12 +32,6 @@ import javax.ws.rs.core.Response;
 @Path("/shipping/execution")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
-    @OPTIONS
-    @Path("/remaining")
-    public Response corsPreflightForListRemaining(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
     /**
      *
      * @param startPosition

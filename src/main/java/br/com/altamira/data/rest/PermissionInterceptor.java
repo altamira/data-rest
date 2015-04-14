@@ -113,7 +113,9 @@ public class PermissionInterceptor implements ContainerRequestFilter {
             }
 
         } else {
-            Response response = Response.status(Response.Status.UNAUTHORIZED).entity("Token required").build();
+            HashMap<String, String> map = new HashMap<>();
+            map.put("message", "Token required");
+            Response response = Response.status(Response.Status.UNAUTHORIZED).entity(map).build();
             requestContext.abortWith(response);
         }
 
@@ -142,8 +144,11 @@ public class PermissionInterceptor implements ContainerRequestFilter {
             return invocationBuilder.post(Entity.json(map));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
+            HashMap<String, String> map = new HashMap<>();
+            map.put("message", e.getMessage());
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(map).build();
         }
+        
         return response;
     }
 

@@ -69,15 +69,4 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
         return createNoContentResponse().build();
     }
 
-    @OPTIONS
-    @Path("/{id:[0-9]*}/checked")
-    public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/unchecked")
-    public Response corsPreflightForUncheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 }

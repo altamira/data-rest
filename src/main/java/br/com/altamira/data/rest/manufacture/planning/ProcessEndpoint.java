@@ -39,12 +39,6 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
     @Inject
     private ProduceDao produceDao;
 
-    @OPTIONS
-    @Path("/{id:[0-9]*}/bom")
-    public Response corsPreflightForListBOM(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
     /**
      * Replace delivery dates in batch
      *
@@ -133,12 +127,6 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
         map.putAll(info.getQueryParameters());
 
         return createListResponse(((ProcessDao) dao).listSummary(map, startPosition, maxResult)).build();
-    }
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/component")
-    public Response corsPreflightForListComponent(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
     }
 
     /**

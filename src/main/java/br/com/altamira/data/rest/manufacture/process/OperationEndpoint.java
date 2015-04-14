@@ -52,9 +52,4 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
         ).build();
     }
 
-    @OPTIONS
-    @Path("/{id:[0-9]*}/calcule")
-    public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 }

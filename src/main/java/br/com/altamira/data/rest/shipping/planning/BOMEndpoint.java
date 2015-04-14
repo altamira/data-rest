@@ -40,12 +40,6 @@ import javax.ws.rs.core.Response;
 @Path("/shipping/planning")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
 
-    @OPTIONS
-    @Path("/{id:[0-9]*}/delivery")
-    public Response corsPreflightForReplaceDeliveryDates(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
     /**
      * Replace delivery dates in batch
      *
@@ -64,12 +58,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
 
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
         return createEntityResponse(((BOMDao) dao).replaceRemainingDeliveryDates(id, dates)).build();
-    }
-
-    @OPTIONS
-    @Path("/remaining")
-    public Response corsPreflightForlistRemaining(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
     }
     
     /**
