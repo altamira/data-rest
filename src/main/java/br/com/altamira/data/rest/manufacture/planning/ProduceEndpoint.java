@@ -7,6 +7,7 @@ package br.com.altamira.data.rest.manufacture.planning;
 
 import br.com.altamira.data.model.manufacture.planning.Produce;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -15,7 +16,8 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PLANNING")
 @Path("/manufacture/planning/{id:[0-9]*}/bom/{id:[0-9]*}/item/{id:[0-9]*}/component/{id:[0-9]*}/produce")
 public class ProduceEndpoint extends BaseEndpoint<Produce> {
-    
+
 }

@@ -35,6 +35,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -91,6 +95,11 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     /**
      *
      */
+    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
+
+    /**
+     *
+     */
     @Inject
     protected Logger log;
 
@@ -121,9 +130,9 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             throws IOException {
 
         MultivaluedMap<String, String> map = info.getPathParameters();
-        
+
         map.putAll(info.getQueryParameters());
-        
+
         return createListResponse(
                 dao.list(map, startPosition, maxResult)).build();
     }
@@ -144,7 +153,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         return createEntityResponse(
                 dao.find(id)).build();
     }
-    
+
     /**
      *
      * @param entity
@@ -214,33 +223,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
                 .header("Access-Control-Allow-Credentials", "true")
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
                 .header("Access-Control-Max-Age", "1209600").build();
-    }
-
-    /**
-     *
-     * @param origin
-     * @return
-     */
-    @OPTIONS
-    public Response corsPreflight(@HeaderParam("Origin") String origin) {
-        return getCORSHeaders(origin);
-    }
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}")
-    public Response corsPreflightForIdPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
-
-    /**
-     *
-     * @param origin
-     * @return
-     */
-    @OPTIONS
-    @Path("{key:[a-zA-Z0-9]*}")
-    public Response corsPreflightPath(@HeaderParam("Origin") String origin, @PathParam("key") String key) {
-        return getCORSHeaders(origin);
     }
 
     /**
@@ -365,14 +347,14 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         hibernateModule.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
         hibernateModule.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, true);
         objectMapper.registerModule(hibernateModule);
-        
+
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         objectMapper.getSerializerProvider().setNullValueSerializer(new NullValueSerializer());
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
         ObjectWriter writer = objectMapper.writerWithView(JSonViews.EntityView.class);
 
         objectMapper.setSerializerProvider(new NullProvider());
-        
+
         return createOkResponse(entity, writer);
     }
 
@@ -407,5 +389,28 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
         return clazz;
+    }
+
+    /**
+     * Check the Auth Token
+     *
+     * @param Token String
+     * @return Response
+     */
+    public static Response getUserDetailsByToken(String token) {
+        Response response = null;
+
+        try {
+            String url = TOKEN_URL + "?token=" + token;
+            Client client = ClientBuilder.newClient();
+            WebTarget webTarget = client.target(url);
+            Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+            response = invocationBuilder.get();
+            return response;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+        return response;
     }
 }

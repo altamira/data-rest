@@ -8,6 +8,7 @@ package br.com.altamira.data.rest.manufacture.planning;
 import br.com.altamira.data.dao.manufacture.planning.OperationDao;
 import br.com.altamira.data.model.manufacture.planning.Operation;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -30,14 +31,9 @@ import javax.ws.rs.core.Response;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PLANNING")
 @Path("/manufacture/planning/operation")
 public class OperationEndpoint extends BaseEndpoint<Operation> {
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/bom")
-    public Response corsPreflightForListBOM(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 
     /**
      * Replace delivery dates in batch
@@ -58,11 +54,11 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
         MultivaluedMap<String, String> map = info.getPathParameters();
 
         map.putAll(info.getQueryParameters());
-        
+
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
         return createListResponse(((OperationDao) dao).listBOM(map, startPosition, maxResult)).build();
-    }    
-    
+    }
+
     /**
      *
      * @param startPosition
@@ -81,10 +77,10 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
         MultivaluedMap<String, String> map = info.getPathParameters();
 
         map.putAll(info.getQueryParameters());
-        
+
         return createListResponse(((OperationDao) dao).listBOMItem(map, startPosition, maxResult)).build();
     }
-    
+
     /**
      *
      * @param startPosition
@@ -96,17 +92,17 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
     @Path("/{id:[0-9]*}/bom/{id:[0-9]*}/item/{id:[0-9]*}/component")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response ListComponent(
-    		@DefaultValue("0") @QueryParam("start") Integer startPosition,
-    		@DefaultValue("10") @QueryParam("max") Integer maxResult)
-    				throws JsonProcessingException {
+            @DefaultValue("0") @QueryParam("start") Integer startPosition,
+            @DefaultValue("10") @QueryParam("max") Integer maxResult)
+            throws JsonProcessingException {
 
-    	MultivaluedMap<String, String> map = info.getPathParameters();
+        MultivaluedMap<String, String> map = info.getPathParameters();
 
-    	map.putAll(info.getQueryParameters());
+        map.putAll(info.getQueryParameters());
 
-    	return createListResponse(((OperationDao) dao).listBOMItemComponent(map, startPosition, maxResult)).build();
+        return createListResponse(((OperationDao) dao).listBOMItemComponent(map, startPosition, maxResult)).build();
     }
-    
+
     /**
      * Replace delivery dates in batch
      *
@@ -119,14 +115,14 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
     @Path("/summary")
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response ListSummary(
-    		@DefaultValue("0") @QueryParam("start") Integer startPosition,
-    		@DefaultValue("10") @QueryParam("max") Integer maxResult)
-    				throws JsonProcessingException {
+            @DefaultValue("0") @QueryParam("start") Integer startPosition,
+            @DefaultValue("10") @QueryParam("max") Integer maxResult)
+            throws JsonProcessingException {
 
-    	MultivaluedMap<String, String> map = info.getPathParameters();
+        MultivaluedMap<String, String> map = info.getPathParameters();
 
-    	map.putAll(info.getQueryParameters());
+        map.putAll(info.getQueryParameters());
 
-    	return createListResponse(((OperationDao) dao).listSummary(map, startPosition, maxResult)).build();
+        return createListResponse(((OperationDao) dao).listSummary(map, startPosition, maxResult)).build();
     }
 }

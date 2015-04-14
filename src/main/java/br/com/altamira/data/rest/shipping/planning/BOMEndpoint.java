@@ -9,6 +9,7 @@ import br.com.altamira.data.dao.shipping.planning.BOMDao;
 import br.com.altamira.data.model.shipping.planning.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
 import static br.com.altamira.data.rest.BaseEndpoint.ID_VALIDATION;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.util.Date;
@@ -35,14 +36,9 @@ import javax.ws.rs.core.Response;
  * Bill of Material rest services
  */
 @RequestScoped
+@Resource(name = "SHIPPING_PLANNING")
 @Path("/shipping/planning")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
-
-    @OPTIONS
-    @Path("/{id:[0-9]*}/delivery")
-    public Response corsPreflightForReplaceDeliveryDates(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 
     /**
      * Replace delivery dates in batch
@@ -62,12 +58,6 @@ public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process
 
         //((BOMDao) dao).replaceRemainingDeliveryDates(id, dates);
         return createEntityResponse(((BOMDao) dao).replaceRemainingDeliveryDates(id, dates)).build();
-    }
-
-    @OPTIONS
-    @Path("/remaining")
-    public Response corsPreflightForlistRemaining(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
     }
     
     /**

@@ -9,36 +9,32 @@ package org.jboss.resteasy.api.validation;
  *
  * @author Alessandro
  */
-public class ConstraintType
-{
- 
+public class ConstraintType {
+
     /**
      *
      */
-    public enum Type { 
+    public enum Type {
 
         /**
          *
          */
-        CLASS, 
-
-       /**
-        *
-        */
-       FIELD, 
-
+        CLASS,
         /**
          *
          */
-        PROPERTY, 
-
+        FIELD,
         /**
          *
          */
-        PARAMETER, 
-
-       /**
-        *
-        */
-       RETURN_VALUE};
+        PROPERTY,
+        /**
+         *
+         */
+        PARAMETER,
+        /**
+         *
+         */
+        RETURN_VALUE
+    };
 }

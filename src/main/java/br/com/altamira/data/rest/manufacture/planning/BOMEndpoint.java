@@ -8,6 +8,7 @@ package br.com.altamira.data.rest.manufacture.planning;
 import br.com.altamira.data.dao.manufacture.planning.BOMDao;
 import br.com.altamira.data.model.manufacture.planning.BOM;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -27,13 +28,9 @@ import javax.ws.rs.core.Response;
  * Bill of Material rest services
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PLANNING")
 @Path("/manufacture/planning/{id:[0-9]*}/bom")
 public class BOMEndpoint extends BaseEndpoint<BOM> /*implements Endpoint<Process> See https://issues.jboss.org/browse/WFLY-2724*/ {
-
-    @OPTIONS
-    public Response corsPreflightForListBOM(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
 
     /**
      * Replace delivery dates in batch

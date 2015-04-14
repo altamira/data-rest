@@ -6,6 +6,7 @@
 package br.com.altamira.data.rest.common;
 
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.Path;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "COMMON")
 @Path("common/material/{parentId:[0-9]*}/component")
 public class ComponentEndpoint extends BaseEndpoint<br.com.altamira.data.model.common.Component> {
     

@@ -6,6 +6,7 @@ import br.com.altamira.data.model.manufacture.process.Operation;
 import br.com.altamira.data.model.measurement.Measure;
 import br.com.altamira.data.rest.BaseEndpoint;
 import static br.com.altamira.data.rest.BaseEndpoint.ID_VALIDATION;
+import br.com.altamira.data.rest.Resource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
@@ -23,6 +24,7 @@ import javax.ws.rs.core.Response;
  * @author alessandro.holanda
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PROCESS")
 @Path("manufacture/process/{parentId:[0-9]*}/operation")
 public class OperationEndpoint extends BaseEndpoint<Operation> {
 
@@ -43,16 +45,11 @@ public class OperationEndpoint extends BaseEndpoint<Operation> {
 
         return createEntityResponse(
                 ((OperationDao) dao).calcule(
-                        ((OperationDao) dao).find(id), 
-                        variable, 
+                        ((OperationDao) dao).find(id),
+                        variable,
                         info.getPathParameters()
                 )
         ).build();
     }
-    
-    @OPTIONS
-    @Path("/{id:[0-9]*}/calcule")
-    public Response corsPreflightForCheckedPath(@HeaderParam("Origin") String origin, @PathParam("id") long id) {
-        return getCORSHeaders(origin);
-    }
+
 }

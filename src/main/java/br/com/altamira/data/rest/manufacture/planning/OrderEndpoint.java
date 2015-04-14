@@ -8,6 +8,7 @@ package br.com.altamira.data.rest.manufacture.planning;
 import br.com.altamira.data.dao.manufacture.planning.OrderDao;
 import br.com.altamira.data.model.manufacture.planning.Order;
 import br.com.altamira.data.rest.BaseEndpoint;
+import br.com.altamira.data.rest.Resource;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.DefaultValue;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  * @author Alessandro
  */
 @RequestScoped
+@Resource(name = "MANUFACTURE_PLANNING")
 @Path("/manufacture/planning")
 public class OrderEndpoint extends BaseEndpoint<Order> {
 
