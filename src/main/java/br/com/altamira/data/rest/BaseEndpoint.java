@@ -206,21 +206,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
     /**
      *
-     * @param origin
-     * @return
-     */
-    protected Response getCORSHeaders(String origin) {
-        return Response
-                .ok()
-                .header("Access-Control-Allow-Origin", origin)
-                .header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Content-Type, Content-Length, Accept, Authorization, X-Requested-With")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                .header("Access-Control-Max-Age", "1209600").build();
-    }
-
-    /**
-     *
      * @param entity
      * @param objectWriter
      * @return
@@ -236,13 +221,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         responseBuilder.header("Location", info.getRequestUri());
 
         responseBuilder.entity(objectWriter.writeValueAsString(entity));
-
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
 
         return responseBuilder;
     }
@@ -271,13 +249,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
         responseBuilder.entity(writer.writeValueAsString(entity));
 
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
-
         return responseBuilder;
     }
 
@@ -291,13 +262,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         ResponseBuilder responseBuilder = Response.noContent();
 
         responseBuilder.header("Location", info.getRequestUri());
-
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
 
         return responseBuilder;
     }
