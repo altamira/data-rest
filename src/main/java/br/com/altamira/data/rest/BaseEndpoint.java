@@ -93,11 +93,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     public static final String ID_NOT_NULL_VALIDATION = "Entity id can't be null or zero.";
     
     /**
-     * 
-     */
-    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
-
-    /**
      *
      */
     @Inject
@@ -418,25 +413,4 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         return clazz;
     }
     
-    /**
-	 * Check the Auth Token
-	 * @param Token String
-	 * @return Response
-	 */
-	public static Response getUserDetailsByToken(String token) {
-		Response response = null;
-
-		try {
-			String url = TOKEN_URL + "?token=" + token;
-			Client client = ClientBuilder.newClient();
-			WebTarget webTarget = client.target(url);
-			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-			response = invocationBuilder.get();
-			return response;
-		} catch (Exception e) {            
-			System.out.println(e.getMessage());
-			
-		}
-		return response;
-	}
 }
