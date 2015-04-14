@@ -1,8 +1,10 @@
 package br.com.altamira.data.rest;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,7 +30,7 @@ public class PermissionInterceptor implements ContainerRequestFilter {
     /**
      *
      */
-    private static final String AUTH_URL = "http://data.altamira.com.br/security-oauth2-0.2.0-SNAPSHOT/authz/permission";
+    private static final String AUTH_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/permission";
 
     /**
      *
@@ -108,14 +110,14 @@ public class PermissionInterceptor implements ContainerRequestFilter {
             Response authResponse = checkAuth(token, resource.toString(), permission);
 
             if (authResponse.getStatus() != 200) {
-                String message = authResponse.readEntity(HashMap.class).get("message").toString();
+                Object message = authResponse.readEntity(Object.class);
                 requestContext.abortWith(Response.status(authResponse.getStatus()).entity(message).build());
             }
 
         } else {
             HashMap<String, String> map = new HashMap<>();
             map.put("message", "Token required");
-            Response response = Response.status(Response.Status.UNAUTHORIZED).entity(map).build();
+            Response response = Response.status(Response.Status.UNAUTHORIZED).entity(map).type(MediaType.APPLICATION_JSON).build();
             requestContext.abortWith(response);
         }
 
@@ -141,7 +143,7 @@ public class PermissionInterceptor implements ContainerRequestFilter {
             HashMap<String, String> map = new HashMap<>();
             map.put("resource", resource);
 
-            return invocationBuilder.post(Entity.json(map));
+            response = invocationBuilder.post(Entity.json(map));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             HashMap<String, String> map = new HashMap<>();

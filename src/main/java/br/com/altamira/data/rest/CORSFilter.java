@@ -36,11 +36,13 @@ public class CORSFilter implements ContainerResponseFilter {
     @Override
     public void filter(final ContainerRequestContext requestContext,
             final ContainerResponseContext responseContext) throws IOException {
-        responseContext.getHeaders().add("Access-Control-Allow-Origin", headers.getRequestHeader("Origin").get(0));
-        responseContext.getHeaders().add("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Content-Type, Content-Length, Accept, Authorization, X-Requested-With");
-        responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-        responseContext.getHeaders().add("Access-Control-Max-Age", "1209600");
+        if (!headers.getRequestHeader("Origin").isEmpty()) {
+            responseContext.getHeaders().add("Access-Control-Allow-Origin", headers.getRequestHeader("Origin").get(0));
+            responseContext.getHeaders().add("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Content-Type, Content-Length, Accept, Authorization, X-Requested-With");
+            responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
+            responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+            responseContext.getHeaders().add("Access-Control-Max-Age", "1209600");
+        }
     }
 
 }
