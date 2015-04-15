@@ -37,11 +37,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Path("/shipping/planning/{parentId:[0-9]*}/history")
 public class HistoryEndpoint extends BaseEndpoint<History> {
 	
-    /**
-     * 
-     */
-    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
-	
 	@Override
 	@POST
     @Consumes(value = MediaType.APPLICATION_JSON)
@@ -65,26 +60,7 @@ public class HistoryEndpoint extends BaseEndpoint<History> {
 	 */
 	private User getUserDetailsByToken(String token) {
 		
-		User user = null;
-		Response response = null;
-		try {
-			String url = TOKEN_URL + "?token=" + token;
-			Client client = ClientBuilder.newClient();
-			WebTarget webTarget = client.target(url);
-			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-			response = invocationBuilder.get();
-			
-			if(response.getStatus() == 200)
-			{
-				 Long userId = Long.parseLong(response.readEntity(AuthTokenChkRespDataBean.class).getUserId());
-				 user = ((HistoryDao)dao).getUserById(userId);
-			}
-				
-		} catch (Exception e) {            
-			System.out.println(e.getMessage());
-			
-		}
-		return user;
+		return ((HistoryDao)dao).getUserByToken(token);
 	}
     
 }

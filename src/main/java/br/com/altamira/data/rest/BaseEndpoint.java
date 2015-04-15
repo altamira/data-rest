@@ -27,18 +27,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -91,11 +85,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
      *
      */
     public static final String ID_NOT_NULL_VALIDATION = "Entity id can't be null or zero.";
-
-    /**
-     *
-     */
-    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
 
     /**
      *
@@ -212,21 +201,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
     /**
      *
-     * @param origin
-     * @return
-     */
-    protected Response getCORSHeaders(String origin) {
-        return Response
-                .ok()
-                .header("Access-Control-Allow-Origin", origin)
-                .header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Origin, Content-Type, Content-Length, Accept, Authorization, X-Requested-With")
-                .header("Access-Control-Allow-Credentials", "true")
-                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
-                .header("Access-Control-Max-Age", "1209600").build();
-    }
-
-    /**
-     *
      * @param entity
      * @param objectWriter
      * @return
@@ -242,13 +216,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         responseBuilder.header("Location", info.getRequestUri());
 
         responseBuilder.entity(objectWriter.writeValueAsString(entity));
-
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
 
         return responseBuilder;
     }
@@ -277,13 +244,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
 
         responseBuilder.entity(writer.writeValueAsString(entity));
 
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
-
         return responseBuilder;
     }
 
@@ -297,13 +257,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         ResponseBuilder responseBuilder = Response.noContent();
 
         responseBuilder.header("Location", info.getRequestUri());
-
-        if (headers.getHeaderString("Origin") != null
-                && !headers.getHeaderString("Origin").isEmpty()) {
-            responseBuilder.header("Access-Control-Allow-Origin",
-                    headers.getRequestHeader("Origin").get(0)).header(
-                            "Access-Control-Allow-Credentials", "true");
-        }
 
         return responseBuilder;
     }
@@ -391,26 +344,4 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         return clazz;
     }
 
-    /**
-     * Check the Auth Token
-     *
-     * @param Token String
-     * @return Response
-     */
-    public static Response getUserDetailsByToken(String token) {
-        Response response = null;
-
-        try {
-            String url = TOKEN_URL + "?token=" + token;
-            Client client = ClientBuilder.newClient();
-            WebTarget webTarget = client.target(url);
-            Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-            response = invocationBuilder.get();
-            return response;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
-        }
-        return response;
-    }
 }
