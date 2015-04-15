@@ -89,11 +89,6 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
     /**
      *
      */
-    private static final String TOKEN_URL = "http://localhost:8080/security-oauth2-0.2.0-SNAPSHOT/authz/token";
-
-    /**
-     *
-     */
     @Inject
     protected Logger log;
 
