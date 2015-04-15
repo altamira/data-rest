@@ -57,6 +57,7 @@
     <class>br.com.altamira.data.model.security.Permission</class>
     <class>br.com.altamira.data.model.security.Profile</class>
     <class>br.com.altamira.data.model.security.User</class>
+    <class>br.com.altamira.data.model.security.Resource</class>
     <class>br.com.altamira.data.model.shipping.execution.BOM</class>
     <class>br.com.altamira.data.model.shipping.execution.Component</class>
     <class>br.com.altamira.data.model.shipping.execution.Delivered</class>
