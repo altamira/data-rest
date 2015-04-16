@@ -5,10 +5,9 @@
  */
 package br.com.altamira.data.rest.shipping.planning;
 
-import br.com.altamira.data.model.shipping.planning.History;
+import br.com.altamira.data.model.shipping.planning.User;
 import br.com.altamira.data.rest.BaseEndpoint;
 import br.com.altamira.data.rest.Resource;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
 
@@ -18,7 +17,7 @@ import javax.ws.rs.Path;
  */
 @RequestScoped
 @Resource(name = "SHIPPING_PLANNING")
-@Path("/shipping/planning/{parentId:[0-9]*}/history")
-public class HistoryEndpoint extends BaseEndpoint<History> {
-
+@Path("/shipping/planning/{id:[0-9]*}/history/{id:[0-9]*}/user")
+public class UserEndpoint extends BaseEndpoint<User> {
+    
 }

@@ -159,7 +159,11 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             throws IllegalArgumentException, UriBuilderException,
             JsonProcessingException {
 
-        return createCreatedResponse(dao.create(entity, info.getPathParameters())).build();
+        MultivaluedMap<String, String> map = info.getPathParameters();
+
+        map.putAll(info.getQueryParameters());
+        
+        return createCreatedResponse(dao.create(entity, map)).build();
     }
 
     /**
@@ -178,8 +182,12 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
             @NotNull(message = ENTITY_VALIDATION) T entity)
             throws JsonProcessingException {
 
+        MultivaluedMap<String, String> map = info.getPathParameters();
+
+        map.putAll(info.getQueryParameters());
+        
         return createEntityResponse(
-                dao.update(entity, info.getPathParameters())).build();
+                dao.update(entity, map)).build();
     }
 
     /**

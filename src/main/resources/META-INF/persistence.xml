@@ -72,6 +72,8 @@
     <class>br.com.altamira.data.model.shipping.planning.Status</class>
     <class>br.com.altamira.data.model.shipping.planning.Transport</class>
     <class>br.com.altamira.data.model.manufacture.planning.Material</class>
+    <class>br.com.altamira.data.model.shipping.planning.User</class>
+    <class>br.com.altamira.data.model.shipping.planning.AccessToken</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
