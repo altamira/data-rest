@@ -6,16 +6,27 @@
 package br.com.altamira.data.rest.common;
 
 import br.com.altamira.data.dao.common.MaterialBaseDao;
+import br.com.altamira.data.dao.common.MaterialDao;
 import br.com.altamira.data.rest.BaseEndpoint;
+
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilderException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  *
@@ -57,6 +68,19 @@ public abstract class MaterialBaseEndpoint<T extends br.com.altamira.data.model.
         
         return createListResponse(
                 dao.list(map, startPosition, maxResult)).build();
+    }
+    
+    @POST
+    @Path("{id:[0-9]*}/process")
+    @Consumes(value = MediaType.APPLICATION_JSON)
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public Response create(
+            @NotNull(message = ENTITY_VALIDATION) HashMap<String, String>map)
+            throws IllegalArgumentException, UriBuilderException,
+            JsonProcessingException {
+
+    	String processId =  map.get("id");
+    	return createListResponse(((MaterialDao)dao).updateProcessId(processId,info.getPathParameters())).build();
     }
 
 }
