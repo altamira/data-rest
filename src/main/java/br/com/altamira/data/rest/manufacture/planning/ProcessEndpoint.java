@@ -49,7 +49,7 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
      */
     @GET
     @Path("/{id:[0-9]*}/bom")
-    @Consumes(value = MediaType.APPLICATION_JSON)
+    @Produces(value = MediaType.APPLICATION_JSON)
     public Response ListBOM(
             @DefaultValue("0") @QueryParam("start") Integer startPosition,
             @DefaultValue("10") @QueryParam("max") Integer maxResult)
@@ -139,7 +139,7 @@ public class ProcessEndpoint extends BaseEndpoint<br.com.altamira.data.model.man
      */
     @GET
     @Path("/{id:[0-9]*}/component")
-    @Consumes(value = MediaType.APPLICATION_JSON)
+    @Produces(value = MediaType.APPLICATION_JSON)
     public Response ListComponent(
             @DefaultValue("0") @QueryParam("start") Integer startPosition,
             @DefaultValue("10") @QueryParam("max") Integer maxResult)
