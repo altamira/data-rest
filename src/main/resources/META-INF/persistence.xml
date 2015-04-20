@@ -20,6 +20,7 @@
     <class>br.com.altamira.data.model.manufacture.bom.Component</class>
     <class>br.com.altamira.data.model.manufacture.bom.Delivery</class>
     <class>br.com.altamira.data.model.manufacture.bom.Item</class>
+    <class>br.com.altamira.data.model.manufacture.bom.Status</class>
     <class>br.com.altamira.data.model.manufacture.execution.BOM</class>
     <class>br.com.altamira.data.model.manufacture.execution.Component</class>
     <class>br.com.altamira.data.model.manufacture.execution.Delivered</class>
