@@ -240,8 +240,7 @@ public abstract class BaseEndpoint<T extends br.com.altamira.data.model.Entity> 
         ObjectMapper objectMapper = new ObjectMapper();
 
         Hibernate4Module hibernateModule = new Hibernate4Module();
-        hibernateModule.enable(Hibernate4Module.Feature.FORCE_LAZY_LOADING);
-        //hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, false);
+        hibernateModule.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, false);
         hibernateModule.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
         objectMapper.registerModule(hibernateModule);
         objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
